@@ -1,6 +1,6 @@
 # Číselník-Laravel
 
-Číselník (could probably be translated to English as "Directory") is [Laravel](https://laravel.com)-based web application for managing organizations participating in eduID.cz and/or eduroam.cz federations.
+Číselník (could probably be translated to English as "Directory") is [Laravel](https://laravel.com)-based web application for managing organizations participating in eduID.cz and eduroam.cz federations or CESNET CA.
 
 ## Requirements
 

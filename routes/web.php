@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CesnetCaController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FakeController;
@@ -41,6 +42,7 @@ Route::get('inactive', function () {
 
 Route::resource('organizations', OrganizationController::class);
 Route::resource('units', UnitController::class);
+Route::resource('cesnet-ca', CesnetCaController::class)->only('index', 'create', 'store');
 
 Route::resource('users', UserController::class)->except('show', 'edit', 'update');
 Route::controller(UserController::class)->group(function () {

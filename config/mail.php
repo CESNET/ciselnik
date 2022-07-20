@@ -96,6 +96,11 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'reply_to' => [
+        'address' => env('MAIL_REPLYTO_ADDRESS', 'noreply@example.com'),
+        'name' => env('MAIL_REPLYTO_NAME', 'HelpDesk'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
@@ -114,5 +119,7 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    'notify_new_object' => env('MAIL_NOTIFY_NEW_OBJECT'),
 
 ];

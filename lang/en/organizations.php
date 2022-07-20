@@ -11,6 +11,7 @@ return [
     'placeholder_ico' => 'Company identifier (IČO in Czech)',
     'placeholder_l' => 'City',
     'placeholder_labeleduri' => 'Home page (HTTPS is preferred)',
+    'placeholder_o' => 'Organizational name (only letters, numbers, dashes, underscores, commas, dots and spaces)',
     'placeholder_o;lang-cs' => 'Organizational name in Czech',
     'placeholder_o;lang-en' => 'Organizational name in English',
     'placeholder_oabbrev;lang-cs' => 'Organizational abbreviation in Czech',

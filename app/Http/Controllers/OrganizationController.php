@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Ldap\Organization;
 use App\Http\Requests\StoreOrganization;
 use App\Http\Requests\UpdateOrganization;
+use App\Mail\OrganizationCreated;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 
 class OrganizationController extends Controller
@@ -26,12 +28,18 @@ class OrganizationController extends Controller
 
     public function store(StoreOrganization $request)
     {
-        $organization = Organization::create(
-            array_merge($request->validated(), [
-                'o' => remove_accents($request->validated('o;lang-cs')),
-                'oabbrev' => remove_accents($request->validated('oabbrev;lang-cs')),
-            ])
-        );
+        try {
+            $organization = Organization::create(
+                array_merge($request->validated(), [
+                    'o' => remove_accents($request->validated('o;lang-cs')),
+                    'oabbrev' => remove_accents($request->validated('oabbrev;lang-cs')),
+                ])
+            );
+
+            Mail::to(config('mail.notify_new_object'))->send(new OrganizationCreated($organization));
+        } catch (\LdapRecord\Exceptions\AlreadyExistsException) {
+            abort(500, __('common.object_exists'));
+        }
 
         return redirect()
             ->route('organizations.show', $organization)

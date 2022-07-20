@@ -24,7 +24,8 @@
 
                 <div class="md:flex-row md:items-center flex flex-col">
                     <p class="flex items-center h-16">
-                        <a class="inline-block px-4 py-2 text-lg font-bold" href="/">{{ config('app.name') }}</a>
+                        <a class="inline-block px-4 py-2 text-lg font-bold"
+                            href="/">{{ config('app.name') }}</a>
                     </p>
                     <ul class="md:flex md:flex-row flex-col hidden" id="navigation">
                         <li>
@@ -34,6 +35,10 @@
                         <li>
                             <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'units') bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
                                 href="{{ route('units.index') }}">{{ __('common.units') }}</a>
+                        </li>
+                        <li>
+                            <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'cesnet-ca') bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
+                                href="{{ route('cesnet-ca.index') }}">{{ __('common.cesnet-ca') }}</a>
                         </li>
                         <li>
                             <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'users' and Request::segment(2) == Auth::id()) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"

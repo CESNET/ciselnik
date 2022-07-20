@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Ldap\EjbcaOrganization;
 use App\Ldap\Organization;
 use App\Ldap\Unit;
 use Illuminate\Cache\RateLimiting\Limit;

@@ -6,7 +6,9 @@ use App\Http\Requests\StoreUnit;
 use App\Http\Requests\UpdateUnit;
 use App\Ldap\Organization;
 use App\Ldap\Unit;
+use App\Mail\UnitCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UnitController extends Controller
 {
@@ -32,15 +34,21 @@ class UnitController extends Controller
         $dc = preg_replace('/dc=/', '', $request->oparentpointer);
         $organization = Organization::whereDc($dc)->firstOrFail();
 
-        $unit = Unit::create(
-            array_merge($request->validated(), [
-                'o' => remove_accents($request->validated('o;lang-cs')),
-                'oabbrev' => remove_accents($request->validated('ouabbrev;lang-cs')),
-                'ou' => remove_accents($request->validated('ou;lang-cs')),
-                'ouabbrev' => remove_accents($request->validated('ouabbrev;lang-cs')),
-                'oparentpointer' => $organization->getDn(),
-            ])
-        );
+        try {
+            $unit = Unit::create(
+                array_merge($request->validated(), [
+                    'o' => remove_accents($request->validated('o;lang-cs')),
+                    'oabbrev' => remove_accents($request->validated('ouabbrev;lang-cs')),
+                    'ou' => remove_accents($request->validated('ou;lang-cs')),
+                    'ouabbrev' => remove_accents($request->validated('ouabbrev;lang-cs')),
+                    'oparentpointer' => $organization->getDn(),
+                ])
+            );
+
+            Mail::to(config('mail.notify_new_object'))->send(new UnitCreated($unit));
+        } catch (\LdapRecord\Exceptions\AlreadyExistsException) {
+            abort(500, __('common.object_exists'));
+        }
 
         return redirect()
             ->route('units.show', $unit)

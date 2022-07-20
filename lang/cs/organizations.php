@@ -11,6 +11,7 @@ return [
     'placeholder_ico' => 'Identifikační číslo organizace (IČO)',
     'placeholder_l' => 'Město',
     'placeholder_labeleduri' => 'Domovská URL adresa (HTTPS je preferované)',
+    'placeholder_o' => 'Název organizace (pouze písmena, číslice, pomlčky, podtržíka, čárky, tečky a mezery)',
     'placeholder_o;lang-cs' => 'Název organizace v češtině',
     'placeholder_o;lang-en' => 'Název organizace v angličtině',
     'placeholder_oabbrev;lang-cs' => 'Zkratka organizace v češtině',
