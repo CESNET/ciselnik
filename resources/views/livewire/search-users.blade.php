@@ -2,9 +2,11 @@
 
     @if (!empty($search) or $users->count() > 5)
         <div class="mb-4">
-            <label class="sr-only" for="search">{{ __('common.search') }}</label>
-            <input wire:model.debounce.500ms="search" class="w-full px-4 py-2 border rounded-lg" type="text"
-                name="search" id="search" placeholder="{{ __('users.search') }}" autofocus>
+            <form>
+                <label class="sr-only" for="search">{{ __('common.search') }}</label>
+                <input wire:model.debounce.500ms="search" class="w-full px-4 py-2 border rounded-lg" type="text"
+                    name="search" id="search" placeholder="{{ __('users.search') }}" autofocus>
+            </form>
             <div wire:loading class="font-bold">
                 {{ __('users.loading_users_please_wait') }}
             </div>
