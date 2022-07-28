@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!App::environment('production')) {
+        if (! App::environment('production')) {
             Mail::alwaysTo('foo@example.org');
             Model::preventLazyLoading();
         }

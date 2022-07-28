@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\CesnetCaController;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FakeController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ShibbolethController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,7 @@ Route::get('language/{locale}', function ($locale = null) {
         app()->setLocale($locale);
         session()->put('locale', $locale);
     }
+
     return redirect()->back();
 });
 

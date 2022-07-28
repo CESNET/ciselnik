@@ -8,11 +8,12 @@ use Livewire\Component;
 class SearchCesnetCa extends Component
 {
     public $search = '';
+
     public $queryString = ['search'];
 
     public function render()
     {
-        if (!empty($this->search)) {
+        if (! empty($this->search)) {
             return view('livewire.search-cesnet-ca', [
                 'organizations' => EjbcaOrganization::orderBy('o')->whereContains('o', $this->search)->get(),
             ]);

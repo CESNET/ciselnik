@@ -8,11 +8,12 @@ use Livewire\Component;
 class SearchUnits extends Component
 {
     public $search = '';
+
     public $queryString = ['search'];
 
     public function render()
     {
-        if (!empty($this->search)) {
+        if (! empty($this->search)) {
             $dc = Unit::whereHas('oparentpointer')->whereContains('dc', $this->search)->get();
             $o = Unit::whereHas('oparentpointer')->whereContains('o', $this->search)->get();
             $oabbrev = Unit::whereHas('oparentpointer')->whereContains('oabbrev', $this->search)->get();

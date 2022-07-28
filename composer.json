@@ -20,6 +20,7 @@
         "barryvdh/laravel-debugbar": "^3.6",
         "brianium/paratest": "^6.4",
         "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.1",
         "laravel/sail": "^1.0.1",
         "larswiegers/laravel-translations-checker": "^0.2.0",
         "mockery/mockery": "^1.4.4",

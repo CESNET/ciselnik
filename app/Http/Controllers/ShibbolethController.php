@@ -18,8 +18,8 @@ class ShibbolethController extends Controller
         return redirect(
             request()
                 ->server('Shib-Handler')
-                . '/Login?target='
-                . action('\\' . __CLASS__ . '@store')
+                .'/Login?target='
+                .action('\\'.__CLASS__.'@store')
         );
     }
 
@@ -47,7 +47,9 @@ class ShibbolethController extends Controller
 
         $user->refresh();
 
-        if (!$user->active) return redirect('inactive');
+        if (! $user->active) {
+            return redirect('inactive');
+        }
 
         Auth::login($user);
         Session::regenerate();

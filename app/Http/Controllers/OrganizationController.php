@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Ldap\Organization;
 use App\Http\Requests\StoreOrganization;
 use App\Http\Requests\UpdateOrganization;
+use App\Ldap\Organization;
 use App\Mail\OrganizationCreated;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Request;
 
 class OrganizationController extends Controller
 {

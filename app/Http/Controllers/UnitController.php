@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateUnit;
 use App\Ldap\Organization;
 use App\Ldap\Unit;
 use App\Mail\UnitCreated;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class UnitController extends Controller

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLaiOrganization;
 use App\Ldap\LaiOrganization;
-use Illuminate\Http\Request;
 
 class CesnetCaController extends Controller
 {

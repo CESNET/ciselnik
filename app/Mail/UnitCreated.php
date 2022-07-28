@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Ldap\Unit;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -29,7 +28,7 @@ class UnitCreated extends Mailable
      */
     public function build()
     {
-        return $this->subject(config('app.name') . ': Unit Created')
+        return $this->subject(config('app.name').': Unit Created')
             ->text('emails.unit_created');
     }
 }

@@ -8,11 +8,12 @@ use Livewire\Component;
 class SearchOrganizations extends Component
 {
     public $search = '';
+
     public $queryString = ['search'];
 
     public function render()
     {
-        if (!empty($this->search)) {
+        if (! empty($this->search)) {
             $dc = Organization::whereContains('dc', $this->search)->get();
             $o = Organization::whereContains('o', $this->search)->get();
             $oabbrev = Organization::whereContains('oabbrev', $this->search)->get();
