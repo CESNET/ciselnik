@@ -9,7 +9,7 @@ class SearchUnits extends Component
 {
     public $search = '';
 
-    public $queryString = ['search'];
+    public $queryString = ['search' => ['except' => '']];
 
     public function render()
     {

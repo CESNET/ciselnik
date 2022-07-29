@@ -9,7 +9,7 @@ class SearchCesnetCa extends Component
 {
     public $search = '';
 
-    public $queryString = ['search'];
+    public $queryString = ['search' => ['except' => '']];
 
     public function render()
     {
