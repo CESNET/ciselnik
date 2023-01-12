@@ -28,23 +28,23 @@
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.iCO') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('ico') }}
+                    {{ $organization->getFirstAttribute('ico') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.street') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('street') }}
+                    {{ $organization->getFirstAttribute('street') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.l') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('l') }}
+                    {{ $organization->getFirstAttribute('l') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.postalCode') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('postalcode') }}
+                    {{ $organization->getFirstAttribute('postalcode') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.c') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('c') }}
+                    {{ $organization->getFirstAttribute('c') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.labeledURI') }}</x-slot:term>
@@ -53,19 +53,19 @@
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.cesnetOrgID') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('cesnetOrgID') }}
+                    {{ $organization->getFirstAttribute('cesnetOrgID') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.cesnetActive') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('cesnetActive') }}
+                    {{ $organization->getFirstAttribute('cesnetActive') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.cesnetMember') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('cesnetMember') }}
+                    {{ $organization->getFirstAttribute('cesnetMember') ?? __('common.empty') }}
                 </x-row>
                 <x-row>
                     <x-slot:term>{{ __('ldap.cesnetVIP') }}</x-slot:term>
-                    {{ $organization->getFirstAttribute('cesnetVIP') }}
+                    {{ $organization->getFirstAttribute('cesnetVIP') ?? __('common.empty') }}
                 </x-row>
                 <div class="even:bg-gray-50 odd:bg-white px-4 py-5">
                     <x-link-button href="{{ URL::previous() }}" text="{{ __('common.back') }}" />

@@ -16,6 +16,7 @@ return [
     'edit' => 'Upravit',
     'ejbca' => 'EjbCA',
     'email' => 'E-mail',
+    'empty' => 'Hodnota nevyplněna',
     'en' => 'EN',
     'inactive' => 'Neaktivní',
     'javascript_long' => 'Tato aplikace vyžaduje webový prohlížeč se zapnutým JavaScriptem.',

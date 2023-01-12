@@ -16,6 +16,7 @@ return [
     'edit' => 'Edit',
     'ejbca' => 'EjbCA',
     'email' => 'Email',
+    'empty' => 'Not available',
     'en' => 'EN',
     'inactive' => 'Inactive',
     'javascript_long' => 'This application requires a web browser with JavaScript enabled.',
