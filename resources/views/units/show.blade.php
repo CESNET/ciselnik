@@ -68,7 +68,23 @@
                     <a class="hover:underline text-blue-500"
                         href="{{ $unit->getFirstAttribute('labeledURI') }}">{{ $unit->getFirstAttribute('labeledURI') }}</a>
                 </x-row>
-                <div class="odd:bg-gray-50 even:bg-white px-4 py-5">
+                <x-row>
+                    <x-slot:term>{{ __('ldap.cesnetOrgID') }}</x-slot:term>
+                    {{ $unit->getFirstAttribute('cesnetOrgID') }}
+                </x-row>
+                <x-row>
+                    <x-slot:term>{{ __('ldap.cesnetActive') }}</x-slot:term>
+                    {{ $unit->getFirstAttribute('cesnetActive') }}
+                </x-row>
+                <x-row>
+                    <x-slot:term>{{ __('ldap.cesnetMember') }}</x-slot:term>
+                    {{ $unit->getFirstAttribute('cesnetMember') }}
+                </x-row>
+                <x-row>
+                    <x-slot:term>{{ __('ldap.cesnetVIP') }}</x-slot:term>
+                    {{ $unit->getFirstAttribute('cesnetVIP') }}
+                </x-row>
+                <div class="even:bg-gray-50 odd:bg-white px-4 py-5">
                     <x-link-button href="{{ URL::previous() }}" text="{{ __('common.back') }}" />
                     <x-link-button href="{{ route('units.edit', $unit) }}" text="{{ __('common.edit') }}"
                         color="yellow" />

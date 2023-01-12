@@ -2,6 +2,10 @@
 
 return [
     'c' => 'Country',
+    'cesnetActive' => 'CESNET Active',
+    'cesnetMember' => 'CESNET Member',
+    'cesnetOrgID' => 'CESNET ID',
+    'cesnetVIP' => 'CESNET VIP',
     'dc' => 'Domain Component',
     'dn' => 'Distinguished Name',
     'iCO' => 'Company Identifier',
