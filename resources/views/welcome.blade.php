@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }} &dash; @yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="sm:p-16 bg-gray-50 dark:bg-gray-900 dark:text-gray-400 p-4 antialiased text-gray-700">
@@ -88,7 +87,7 @@
                     <small class="text-sm">
                         <a class="hover:underline text-blue-500"
                             href="{{ __('welcome.pii-link') }}">{{ __('welcome.pii-text') }}</a><br>
-                        &copy; 2019&dash;{{ date('Y') }} <a class="hover:underline text-blue-500"
+                        &copy; 2022&dash;{{ date('Y') }} <a class="hover:underline text-blue-500"
                             href="https://www.cesnet.cz">CESNET</a>,
                         <a class="hover:underline text-blue-500" href="mailto:info@eduid.cz">info@eduid.cz</a>.
                     </small>
@@ -106,8 +105,8 @@
                     <div class="sm:flex-row sm:justify-between flex flex-col p-4 space-y-5">
                         <div class="flex items-center space-x-5">
                             <label class="font-semibold" for="user_id">User ID:</label>
-                            <input class="w-20" type="number" name="id" id="user_id" value="1" min="1"
-                                required>
+                            <input class="w-20" type="number" name="id" id="user_id" value="1"
+                                min="1" required>
                         </div>
                         <button class="hover:bg-blue-400 hover:shadow-lg px-6 py-3 bg-blue-300 rounded shadow"
                             type="submit">Fake Login</button>
