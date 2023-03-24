@@ -8,7 +8,6 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\UserStatusController;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+if (app()->environment(['local', 'testing'])) {
+    Route::post('fakelogin', [FakeController::class, 'store']);
+    Route::get('fakelogout', [FakeController::class, 'destroy']);
+}
 
 Route::get('language/{locale}', function ($locale = null) {
     if (isset($locale) && in_array($locale, config('app.locales'))) {
@@ -55,8 +59,3 @@ Route::patch('users/{user}/status', [UserStatusController::class, 'update'])->na
 Route::get('login', [ShibbolethController::class, 'create'])->name('login')->middleware('guest');
 Route::get('auth', [ShibbolethController::class, 'store'])->middleware('guest');
 Route::get('logout', [ShibbolethController::class, 'destroy'])->name('logout')->middleware('auth');
-
-if (App::environment(['local', 'testing'])) {
-    Route::match(['get', 'post'], '/fakelogin/{id?}', [FakeController::class, 'login']);
-    Route::get('fakelogout', [FakeController::class, 'logout']);
-}
