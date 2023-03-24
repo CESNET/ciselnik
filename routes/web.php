@@ -47,11 +47,7 @@ Route::resource('organizations', OrganizationController::class);
 Route::resource('units', UnitController::class);
 Route::resource('cesnet-ca', CesnetCaController::class)->only('index', 'create', 'store');
 
-Route::resource('users', UserController::class)->except('show', 'edit', 'update');
-Route::controller(UserController::class)->group(function () {
-    Route::get('users/{user}', 'show')->withTrashed()->name('users.show');
-    Route::patch('users/{user}/restore', 'restore')->withTrashed()->name('users.restore');
-});
+Route::resource('users', UserController::class)->except('edit', 'update', 'destroy');
 
 Route::patch('users/{user}/role', [UserRoleController::class, 'update'])->name('users.role');
 Route::patch('users/{user}/status', [UserStatusController::class, 'update'])->name('users.status');

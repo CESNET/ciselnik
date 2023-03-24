@@ -30,6 +30,5 @@
     <x-link-button href="{{ URL::previous() }}" text="{{ __('common.back') }}" />
     <x-forms.users-status :user="$user" />
     <x-forms.users-role :user="$user" />
-    <x-forms.users-delete :user="$user" />
 
 @endsection

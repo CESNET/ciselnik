@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -56,42 +55,5 @@ class UserController extends Controller
         return view('users.show', [
             'user' => $user,
         ]);
-    }
-
-    public function destroy(Request $request, User $user)
-    {
-        $this->authorize('delete', $user);
-
-        if ($request->user()->is($user)) {
-            return redirect()
-                ->route('users.show', $user)
-                ->with('status', __('users.cannot_delete_yourself'))
-                ->with('color', 'red');
-        }
-
-        $name = $user->name;
-        $user->delete();
-
-        return redirect()
-            ->route('users.show', $user)
-            ->with('status', __('users.deleted', ['name' => $name]));
-    }
-
-    public function restore(Request $request, User $user)
-    {
-        $this->authorize('restore', $user);
-
-        if ($request->user()->is($user)) {
-            return redirect()
-                ->route('users.show', $user)
-                ->with('status', __('users.cannot_restore_yourself'))
-                ->with('color', 'red');
-        }
-
-        $user->restore();
-
-        return redirect()
-            ->route('users.show', $user)
-            ->with('status', __('users.restored', ['name' => $user->name]));
     }
 }
