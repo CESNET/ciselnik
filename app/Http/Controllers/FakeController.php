@@ -14,10 +14,6 @@ class FakeController extends Controller
         if (app()->environment(['local', 'testing'])) {
             $user = User::findOrFail($request->id);
 
-            if (! $user->active) {
-                return redirect('/inactive');
-            }
-
             Auth::login($user);
             Session::regenerate();
 

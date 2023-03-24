@@ -40,7 +40,8 @@ class SearchUsersTest extends TestCase
         User::factory()->times(10)->create();
         $user = User::latest()->first();
 
-        Livewire::test(SearchUsers::class, ['search' => $user->name])
+        Livewire::test(SearchUsers::class)
+            ->set('search', $user->name)
             ->assertSet('search', $user->name)
             ->assertSee($user->name)
             ->assertSee($user->email)

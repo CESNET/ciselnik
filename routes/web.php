@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 if (app()->environment(['local', 'testing'])) {
-    Route::post('fakelogin', [FakeController::class, 'store']);
-    Route::get('fakelogout', [FakeController::class, 'destroy']);
+    Route::post('fakelogin', [FakeController::class, 'store'])->name('fakelogin');
+    Route::get('fakelogout', [FakeController::class, 'destroy'])->name('fakelogout');
 }
 
 Route::get('language/{locale}', function ($locale = null) {
