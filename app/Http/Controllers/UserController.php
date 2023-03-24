@@ -95,29 +95,6 @@ class UserController extends Controller
             ->with('status', __('users.restored', ['name' => $user->name]));
     }
 
-    public function status(Request $request, User $user)
-    {
-        $this->authorize('everything');
-
-        if ($request->user()->is($user)) {
-            return redirect()
-                ->route('users.show', $user)
-                ->with('status', __('users.cannot_toggle_your_status'))
-                ->with('color', 'red');
-        }
-
-        $user->active = $user->active ? false : true;
-        $user->update();
-
-        $status = $user->active ? 'active' : 'inactive';
-        $color = $user->active ? 'green' : 'red';
-
-        return redirect()
-            ->route('users.show', $user)
-            ->with('status', __("users.$status", ['name' => $user->name]))
-            ->with('color', $color);
-    }
-
     public function role(Request $request, User $user)
     {
         $this->authorize('everything');
