@@ -6,6 +6,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ShibbolethController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\UserStatusController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -49,11 +50,11 @@ Route::resource('cesnet-ca', CesnetCaController::class)->only('index', 'create',
 Route::resource('users', UserController::class)->except('show', 'edit', 'update');
 Route::controller(UserController::class)->group(function () {
     Route::get('users/{user}', 'show')->withTrashed()->name('users.show');
-    Route::patch('users/{user}/role', 'role')->withTrashed()->name('users.role');
     Route::patch('users/{user}/restore', 'restore')->withTrashed()->name('users.restore');
 });
 
-Route::patch('users/{user}/status', [UserStatusController::class, 'update'])->withTrashed()->name('users.status');
+Route::patch('users/{user}/role', [UserRoleController::class, 'update'])->name('users.role');
+Route::patch('users/{user}/status', [UserStatusController::class, 'update'])->name('users.status');
 
 Route::get('login', [ShibbolethController::class, 'create'])->name('login')->middleware('guest');
 Route::get('auth', [ShibbolethController::class, 'store'])->middleware('guest');

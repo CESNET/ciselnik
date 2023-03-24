@@ -47,19 +47,6 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_anonymouse_user_cannot_toggle_users_role()
-    {
-        $user = User::factory()->create();
-
-        $this
-            ->followingRedirects()
-            ->patch(route('users.role', $user))
-            ->assertSeeText('login');
-
-        $this->assertEquals(route('login'), url()->current());
-    }
-
-    /** @test */
     public function a_user_isnt_shown_a_users_list()
     {
         $user = User::factory()->create();
@@ -117,35 +104,6 @@ class UserControllerTest extends TestCase
             ->assertOk();
 
         $this->assertEquals(route('users.show', $user), url()->current());
-    }
-
-    /** @test */
-    public function a_user_cannot_toggle_another_users_role()
-    {
-        $user = User::factory()->create();
-        $anotherUser = User::factory()->create();
-
-        $this
-            ->actingAs($user)
-            ->followingRedirects()
-            ->patch(route('users.role', $anotherUser))
-            ->assertForbidden();
-
-        $this->assertEquals(route('users.role', $anotherUser), url()->current());
-    }
-
-    /** @test */
-    public function a_user_cannot_toggle_their_role()
-    {
-        $user = User::factory()->create();
-
-        $this
-            ->actingAs($user)
-            ->followingRedirects()
-            ->patch(route('users.role', $user))
-            ->assertForbidden();
-
-        $this->assertEquals(route('users.role', $user), url()->current());
     }
 
     /** @test */
@@ -221,43 +179,6 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_toggle_another_users_role()
-    {
-        $admin = User::factory()->create(['admin' => true]);
-        $anotherUser = User::factory()->create();
-
-        $this
-            ->actingAs($admin)
-            ->followingRedirects()
-            ->patch(route('users.role', $anotherUser))
-            ->assertSeeText(__('users.admin_granted', ['name' => $anotherUser->name]))
-            ->assertSeeText($anotherUser->name)
-            ->assertSeeText($anotherUser->uniqueid)
-            ->assertSeeText($anotherUser->email)
-            ->assertOk();
-
-        $this->assertEquals(route('users.show', $anotherUser), url()->current());
-
-        $anotherUser->refresh();
-        $this->assertTrue($anotherUser->admin);
-
-        $this
-            ->actingAs($admin)
-            ->followingRedirects()
-            ->patch(route('users.role', $anotherUser))
-            ->assertSeeText(__('users.admin_revoked', ['name' => $anotherUser->name]))
-            ->assertSeeText($anotherUser->name)
-            ->assertSeeText($anotherUser->uniqueid)
-            ->assertSeeText($anotherUser->email)
-            ->assertOk();
-
-        $this->assertEquals(route('users.show', $anotherUser), url()->current());
-
-        $anotherUser->refresh();
-        $this->assertFalse($anotherUser->admin);
-    }
-
-    /** @test */
     public function an_admin_can_delete_another_user()
     {
         $admin = User::factory()->create(['admin' => true]);
@@ -301,21 +222,6 @@ class UserControllerTest extends TestCase
 
         $anotherUser->refresh();
         $this->assertFalse($anotherUser->trashed());
-    }
-
-    /** @test */
-    public function an_admin_cannot_toggle_their_role()
-    {
-        $admin = User::factory()->create(['admin' => true]);
-
-        $this
-            ->actingAs($admin)
-            ->followingRedirects()
-            ->patch(route('users.role', $admin))
-            ->assertSeeText(__('users.cannot_toggle_your_role'))
-            ->assertOk();
-
-        $this->assertEquals(route('users.show', $admin), url()->current());
     }
 
     /** @test */
