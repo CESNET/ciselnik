@@ -2,16 +2,18 @@
 
 Číselník (could probably be translated to English as "Directory") is [Laravel](https://laravel.com)-based web application for managing organizations participating in eduID.cz and eduroam.cz federations or CESNET CA.
 
+[![Actions Status](https://github.com/JanOppolzer/ciselnik-laravel/workflows/Laravel/badge.svg)](https://github.com/JanOppolzer/ciselnik-laravel/actions)
+
 ## Requirements
 
 This application is written in Laravel 9 and uses PHP version at least 8.0.2.
 
 Authentication is managed by locally running Shibboleth Service Provider, so Apache web server is highly recommended as there is an official Shibboleth module for Apache.
 
-- PHP 8.0.2+
-- Shibboleth SP 3.x
-- Apache 2.4
-- MariaDB 10.6
+-   PHP 8.0.2+
+-   Shibboleth SP 3.x
+-   Apache 2.4
+-   MariaDB 10.6
 
 The above mentioned requirements can easily be achieved by using Ubuntu 22.04 LTS (Jammy Jellyfish). For those running older Ubuntu or Debian, [Ondřej Surý's PPA repository](https://launchpad.net/~ondrej/+archive/ubuntu/php/) might be very appreciated.
 
