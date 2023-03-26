@@ -16,13 +16,9 @@ class OrganizationControllerTest extends TestCase
     {
         DirectoryEmulator::setup('default');
 
-        $faker = \Faker\Factory::create('cs_CZ');
-
-        $dc = $this->faker->word();
-
         $organization = Organization::create([
-            'dc' => strtoupper($dc),
-            'ico' => $ico = $faker->ico(),
+            'dc' => strtoupper($dc = fake()->word()),
+            'ico' => $ico = fake('cs_CZ')->ico(),
         ]);
 
         $this->assertEquals(1, Organization::all()->count());
