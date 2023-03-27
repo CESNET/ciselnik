@@ -4,7 +4,7 @@ namespace Tests\Unit\Utils;
 
 use PHPUnit\Framework\TestCase;
 
-class Helpers extends TestCase
+class HelpersTest extends TestCase
 {
     /** @test */
     public function remove_accents_function_removes_czech_accents_properly()

@@ -35,7 +35,7 @@ class OrganizationController extends Controller
                 ])
             );
 
-            Mail::to(config('mail.notify_new_object'))->send(new OrganizationCreated($organization));
+            Mail::send(new OrganizationCreated($organization));
         } catch (\LdapRecord\Exceptions\AlreadyExistsException) {
             abort(500, __('common.object_exists'));
         }

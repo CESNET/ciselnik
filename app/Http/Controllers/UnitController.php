@@ -44,7 +44,7 @@ class UnitController extends Controller
                 ])
             );
 
-            Mail::to(config('mail.notify_new_object'))->send(new UnitCreated($unit));
+            Mail::send(new UnitCreated($unit));
         } catch (\LdapRecord\Exceptions\AlreadyExistsException) {
             abort(500, __('common.object_exists'));
         }
