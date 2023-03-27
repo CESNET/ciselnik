@@ -10,24 +10,32 @@ use Illuminate\Support\Facades\Mail;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
 use Tests\TestCase;
 
-class OrganizationControllerTest extends TestCase
+class UnitControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function an_anonymouse_user_isnt_show_the_list_of_organizations()
+    public function an_anonymouse_user_cannot_see_units_index()
     {
         $this
             ->followingRedirects()
-            ->get(route('organizations.index'))
+            ->get(route('units.index'))
             ->assertOk()
             ->assertSeeText('login');
-
-        $this->assertEquals(route('login'), url()->current());
     }
 
     /** @test */
-    public function a_user_with_active_account_can_see_the_list_of_organizations()
+    public function an_anonymouse_user_cannot_see_the_form_to_add_a_new_unit()
+    {
+        $this
+            ->followingRedirects()
+            ->get(route('units.create'))
+            ->assertOk()
+            ->assertSeeText('login');
+    }
+
+    /** @test */
+    public function an_active_user_can_see_units_index()
     {
         DirectoryEmulator::setup('default');
 
@@ -35,54 +43,60 @@ class OrganizationControllerTest extends TestCase
 
         $this
             ->actingAs($user)
-            ->get(route('organizations.index'))
+            ->get(route('units.index'))
             ->assertOk();
 
-        $this->assertEquals(route('organizations.index'), url()->current());
+        $this->assertEquals(route('units.index'), url()->current());
+
+        DirectoryEmulator::tearDown();
     }
 
     /** @test */
-    public function a_user_with_active_account_can_see_the_form_to_add_a_new_organization()
+    public function an_active_user_can_see_the_form_to_add_a_new_unit()
     {
+        DirectoryEmulator::setup('default');
+
         $user = User::factory()->create(['active' => true]);
 
         $this
             ->actingAs($user)
-            ->get(route('organizations.create'))
-            ->assertOk()
-            ->assertSeeInOrder([
-                __('organizations.add_organization'),
-                __('ldap.dc'),
-                __('ldap.o'),
-                __('ldap.oAbbrev'),
-                __('ldap.iCO'),
-                __('ldap.street'),
-                __('ldap.l'),
-                __('ldap.postalCode'),
-                __('ldap.c'),
-                __('ldap.labeledURI'),
-                __('common.add'),
-            ]);
+            ->get(route('units.create'))
+            ->assertOk();
 
-        $this->assertEquals(route('organizations.create'), url()->current());
+        $this->assertEquals(route('units.create'), url()->current());
+
+        DirectoryEmulator::tearDown();
     }
 
     /** @test */
-    public function an_active_user_can_add_a_new_organization()
+    public function an_active_user_can_store_a_new_unit()
     {
         DirectoryEmulator::setup('default');
         Mail::fake();
 
         $user = User::factory()->create(['active' => true]);
+        $organization = Organization::create([
+            'dc' => fake()->word(),
+            'o;lang-cs' => fake()->company(),
+            'oabbrev;lang-cs' => fake()->word(),
+            'ico' => fake()->randomNumber(),
+            'street' => fake()->streetAddress(),
+            'l' => fake()->city(),
+            'postalcode' => fake()->randomNumber(),
+            'c' => fake()->stateAbbr(),
+            'labeleduri' => fake()->url(),
+        ]);
 
         $this
             ->followingRedirects()
             ->actingAs($user)
-            ->post(route('organizations.store', [
-                'dc' => fake()->word(),
+            ->post(route('units.store', [
+                'dc' => $dc = fake()->word(),
                 'o;lang-cs' => fake()->company(),
                 'oabbrev;lang-cs' => fake()->word(),
-                'ico' => fake()->randomNumber(),
+                'ou;lang-cs' => fake()->company(),
+                'ouabbrev;lang-cs' => fake()->word(),
+                'oparentpointer' => $organization->getRdn(),
                 'street' => fake()->streetAddress(),
                 'l' => fake()->city(),
                 'postalcode' => fake()->randomNumber(),
@@ -90,18 +104,17 @@ class OrganizationControllerTest extends TestCase
                 'labeleduri' => fake()->url(),
             ]))
             ->assertOk()
-            ->assertSeeText(__('organizations.stored'));
+            ->assertSeeText(__('units.stored'));
 
-        $this->assertCount(1, Organization::all());
-        $organization = Organization::first();
-        $this->assertEquals(route('organizations.show', $organization), url()->current());
+        $unit = Unit::whereDc($dc)->firstOrFail();
+        $this->assertEquals(route('units.show', $unit), url()->current());
 
         DirectoryEmulator::tearDown();
         ob_end_clean();
     }
 
     /** @test */
-    public function an_active_user_is_redirected_to_a_unit_when_accessing_unit_via_organizations()
+    public function an_active_user_can_see_the_update_form_for_a_unit()
     {
         DirectoryEmulator::setup('default');
 
@@ -123,42 +136,7 @@ class OrganizationControllerTest extends TestCase
             'oabbrev;lang-cs' => fake()->word(),
             'ou;lang-cs' => fake()->company(),
             'ouabbrev;lang-cs' => fake()->word(),
-            'oparentpointer' => $organization->getDn(),
-            'street' => fake()->streetAddress(),
-            'l' => fake()->city(),
-            'postalcode' => fake()->randomNumber(),
-            'c' => fake()->stateAbbr(),
-            'labeleduri' => fake()->url(),
-        ]);
-
-        $this->assertCount(1, User::all());
-        $this->assertCount(2, Organization::all());
-        $this->assertCount(2, Unit::all());
-
-        $this
-            ->followingRedirects()
-            ->actingAs($user)
-            ->get(route('organizations.show', $unit))
-            ->assertOk()
-            ->assertSeeText(__('units.redirected_from_organizations'));
-
-        $this->assertEquals(route('units.show', $unit), url()->current());
-
-        DirectoryEmulator::tearDown();
-        ob_end_clean();
-    }
-
-    /** @test */
-    public function an_organization_can_be_edited()
-    {
-        DirectoryEmulator::setup('default');
-
-        $user = User::factory()->create(['active' => true]);
-        $organization = Organization::create([
-            'dc' => fake()->word(),
-            'o;lang-cs' => fake()->company(),
-            'oabbrev;lang-cs' => fake()->word(),
-            'ico' => fake()->randomNumber(),
+            'oparentpointer' => $organization->getRdn(),
             'street' => fake()->streetAddress(),
             'l' => fake()->city(),
             'postalcode' => fake()->randomNumber(),
@@ -168,34 +146,17 @@ class OrganizationControllerTest extends TestCase
 
         $this
             ->actingAs($user)
-            ->get(route('organizations.edit', $organization))
+            ->get(route('units.edit', $unit))
             ->assertOk();
 
-        $this->assertEquals(route('organizations.edit', $organization), url()->current());
+        $this->assertEquals(route('units.edit', $unit), url()->current());
 
         DirectoryEmulator::tearDown();
         ob_end_clean();
     }
 
     /** @test */
-    public function an_organization_can_be_created()
-    {
-        DirectoryEmulator::setup('default');
-
-        $organization = Organization::create([
-            'dc' => strtoupper($dc = fake()->word()),
-            'ico' => $ico = fake('cs_CZ')->ico(),
-        ]);
-
-        $this->assertEquals(1, Organization::all()->count());
-        $this->assertEquals('dc='.strtoupper($dc), $organization->getRdn());
-        $this->assertEquals($ico, $organization->getFirstAttribute('ico'));
-
-        DirectoryEmulator::tearDown();
-    }
-
-    /** @test */
-    public function an_active_user_can_update_an_organization()
+    public function an_active_user_can_update_an_existing_unit()
     {
         DirectoryEmulator::setup('default');
 
@@ -211,11 +172,29 @@ class OrganizationControllerTest extends TestCase
             'c' => fake()->stateAbbr(),
             'labeleduri' => fake()->url(),
         ]);
-        $new_organization = [
-            'o;lang-cs' => $o = fake()->company(),
-            'o' => $o,
-            'oabbrev;lang-cs' => $oabbrev = fake()->word(),
-            'oabbrev' => $oabbrev,
+        $unit = Unit::create([
+            'dc' => fake()->word(),
+            'o;lang-cs' => fake()->company(),
+            'oabbrev;lang-cs' => fake()->word(),
+            'ou;lang-cs' => fake()->company(),
+            'ouabbrev;lang-cs' => fake()->word(),
+            'oparentpointer' => $organization->getRdn(),
+            'street' => fake()->streetAddress(),
+            'l' => fake()->city(),
+            'postalcode' => fake()->randomNumber(),
+            'c' => fake()->stateAbbr(),
+            'labeleduri' => fake()->url(),
+        ]);
+        $new_unit = [
+            'o;lang-cs' => fake()->company(),
+            'o' => fake()->company(),
+            'oabbrev;lang-cs' => fake()->word(),
+            'oabbrev' => fake()->word(),
+            'ou;lang-cs' => fake()->company(),
+            'ou' => fake()->company(),
+            'ouabbrev;lang-cs' => fake()->word(),
+            'ouabbrev' => fake()->word(),
+            'oparentpointer' => $organization->getRdn(),
             'street' => fake()->streetAddress(),
             'l' => fake()->city(),
             'postalcode' => fake()->randomNumber(),
@@ -223,28 +202,23 @@ class OrganizationControllerTest extends TestCase
             'labeleduri' => fake()->url(),
         ];
 
-        $this->assertCount(1, User::all());
-        $this->assertCount(1, Organization::all());
-
         $this
             ->followingRedirects()
             ->actingAs($user)
-            ->patch(route('organizations.update', $organization), $new_organization)
+            ->patch(route('units.update', $unit), $new_unit)
             ->assertOk()
-            ->assertSeeText(__('organizations.updated'));
-
-        $this->assertEquals(route('organizations.show', $organization), url()->current());
+            ->assertSeeText(__('units.updated'));
 
         DirectoryEmulator::tearDown();
         ob_end_clean();
     }
 
     /** @test */
-    public function an_admin_can_delete_an_organization()
+    public function an_admin_can_delete_a_unit()
     {
         DirectoryEmulator::setup('default');
 
-        $user = User::factory()->create(['active' => true, 'admin' => true]);
+        $admin = User::factory()->create(['active' => true, 'admin' => true]);
         $organization = Organization::create([
             'dc' => fake()->word(),
             'o;lang-cs' => fake()->company(),
@@ -256,17 +230,28 @@ class OrganizationControllerTest extends TestCase
             'c' => fake()->stateAbbr(),
             'labeleduri' => fake()->url(),
         ]);
+        $unit = Unit::create([
+            'dc' => fake()->word(),
+            'o;lang-cs' => fake()->company(),
+            'oabbrev;lang-cs' => fake()->word(),
+            'ou;lang-cs' => fake()->company(),
+            'ouabbrev;lang-cs' => fake()->word(),
+            'oparentpointer' => $organization->getRdn(),
+            'street' => fake()->streetAddress(),
+            'l' => fake()->city(),
+            'postalcode' => fake()->randomNumber(),
+            'c' => fake()->stateAbbr(),
+            'labeleduri' => fake()->url(),
+        ]);
 
-        $dn = $organization->getDn();
+        $dn = $unit->getDn();
 
         $this
             ->followingRedirects()
-            ->actingAs($user)
-            ->delete(route('organizations.destroy', $organization))
+            ->actingAs($admin)
+            ->delete(route('units.destroy', $unit))
             ->assertOk()
-            ->assertSeeText(__('organizations.deleted', ['dn' => $dn]));
-
-        $this->assertEquals(route('organizations.index'), url()->current());
+            ->assertSeeText(__('units.deleted', ['dn' => $dn]));
 
         DirectoryEmulator::tearDown();
     }
