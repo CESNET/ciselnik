@@ -4,14 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreLaiOrganization extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,10 +19,12 @@ class StoreLaiOrganization extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'o' => 'required|regex:/^[a-z0-9\,\.\-\_\ ]+$/i|max:255',
+            'name' => 'required',
+            'uniqueid' => 'required|email',
+            'email' => 'required|email',
         ];
     }
 }

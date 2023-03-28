@@ -15,7 +15,7 @@ class SearchCesnetCaTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_component_can_render()
+    public function the_component_can_render(): void
     {
         DirectoryEmulator::setup('ejbca');
 
@@ -27,7 +27,7 @@ class SearchCesnetCaTest extends TestCase
     }
 
     /** @test */
-    public function the_component_is_present_in_cesnet_ca_index()
+    public function the_component_is_present_in_cesnet_ca_index(): void
     {
         DirectoryEmulator::setup('ejbca');
 
@@ -42,7 +42,7 @@ class SearchCesnetCaTest extends TestCase
     }
 
     /** @test */
-    public function the_component_allows_searching_cesnet_ca()
+    public function the_component_allows_searching_cesnet_ca(): void
     {
         DirectoryEmulator::setup('ejbca');
 

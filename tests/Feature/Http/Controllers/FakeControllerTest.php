@@ -13,7 +13,7 @@ class FakeControllerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_log_in_using_fakecontroller()
+    public function a_user_can_log_in_using_fakecontroller(): void
     {
         $user = User::factory()->create(['active' => true]);
         $user->refresh();
@@ -31,7 +31,7 @@ class FakeControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_log_out_using_fakecontroller()
+    public function a_user_can_log_out_using_fakecontroller(): void
     {
         $user = User::factory()->create(['active' => true]);
         $user->refresh();

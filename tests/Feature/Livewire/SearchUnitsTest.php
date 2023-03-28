@@ -16,7 +16,7 @@ class SearchUnitsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_component_can_render()
+    public function the_component_can_render(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -28,7 +28,7 @@ class SearchUnitsTest extends TestCase
     }
 
     /** @test */
-    public function the_component_is_present_in_units_index()
+    public function the_component_is_present_in_units_index(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -43,7 +43,7 @@ class SearchUnitsTest extends TestCase
     }
 
     /** @test */
-    public function the_component_allows_searching_units()
+    public function the_component_allows_searching_units(): void
     {
         DirectoryEmulator::setup('default');
 

@@ -14,7 +14,7 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->admin;
     }
@@ -24,7 +24,7 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user, User $model): bool
     {
         return $user->admin or $user->is($model);
     }
@@ -34,7 +34,7 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->admin;
     }

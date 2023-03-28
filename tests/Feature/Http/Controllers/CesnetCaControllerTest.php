@@ -12,7 +12,7 @@ class CesnetCaControllerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_anonymouse_user_isnt_shown_a_cesnet_ca_list()
+    public function an_anonymouse_user_isnt_shown_a_cesnet_ca_list(): void
     {
         $this
             ->followingRedirects()
@@ -24,7 +24,7 @@ class CesnetCaControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_anonymouse_user_cannot_see_the_form_to_add_a_new_cesnet_ca()
+    public function an_anonymouse_user_cannot_see_the_form_to_add_a_new_cesnet_ca(): void
     {
         $this
             ->followingRedirects()
@@ -36,7 +36,7 @@ class CesnetCaControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_with_active_account_can_see_a_cesnet_ca_list()
+    public function a_user_with_active_account_can_see_a_cesnet_ca_list(): void
     {
         DirectoryEmulator::setup('ejbca');
 
@@ -51,7 +51,7 @@ class CesnetCaControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_with_active_account_can_see_the_form_to_add_a_new_cesnet_ca()
+    public function a_user_with_active_account_can_see_the_form_to_add_a_new_cesnet_ca(): void
     {
         $user = User::factory()->create(['active' => true]);
 
@@ -68,7 +68,7 @@ class CesnetCaControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_with_active_account_can_store_a_new_cesnet_ca()
+    public function a_user_with_active_account_can_store_a_new_cesnet_ca(): void
     {
         DirectoryEmulator::setup('ejbca');
 

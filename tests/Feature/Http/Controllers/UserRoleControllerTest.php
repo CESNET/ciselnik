@@ -12,7 +12,7 @@ class UserRoleControllerTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     /** @test */
-    public function an_anonymouse_user_cannot_toggle_users_role()
+    public function an_anonymouse_user_cannot_toggle_users_role(): void
     {
         $user = User::factory()->create();
 
@@ -25,7 +25,7 @@ class UserRoleControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_toggle_another_users_role()
+    public function a_user_cannot_toggle_another_users_role(): void
     {
         $user = User::factory()->create();
         $anotherUser = User::factory()->create();
@@ -40,7 +40,7 @@ class UserRoleControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_toggle_their_role()
+    public function a_user_cannot_toggle_their_role(): void
     {
         $user = User::factory()->create();
 
@@ -54,7 +54,7 @@ class UserRoleControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_toggle_another_users_role()
+    public function an_admin_can_toggle_another_users_role(): void
     {
         $admin = User::factory()->create(['admin' => true]);
         $anotherUser = User::factory()->create();
@@ -91,7 +91,7 @@ class UserRoleControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_cannot_toggle_their_role()
+    public function an_admin_cannot_toggle_their_role(): void
     {
         $admin = User::factory()->create(['admin' => true]);
 

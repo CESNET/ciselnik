@@ -15,7 +15,7 @@ class OrganizationControllerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_anonymouse_user_isnt_show_the_list_of_organizations()
+    public function an_anonymouse_user_isnt_show_the_list_of_organizations(): void
     {
         $this
             ->followingRedirects()
@@ -27,7 +27,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_with_active_account_can_see_the_list_of_organizations()
+    public function a_user_with_active_account_can_see_the_list_of_organizations(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -42,7 +42,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_with_active_account_can_see_the_form_to_add_a_new_organization()
+    public function a_user_with_active_account_can_see_the_form_to_add_a_new_organization(): void
     {
         $user = User::factory()->create(['active' => true]);
 
@@ -68,7 +68,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_can_add_a_new_organization()
+    public function an_active_user_can_add_a_new_organization(): void
     {
         DirectoryEmulator::setup('default');
         Mail::fake();
@@ -101,7 +101,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_is_redirected_to_a_unit_when_accessing_unit_via_organizations()
+    public function an_active_user_is_redirected_to_a_unit_when_accessing_unit_via_organizations(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -149,7 +149,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_organization_can_be_edited()
+    public function an_organization_can_be_edited(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -178,7 +178,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_organization_can_be_created()
+    public function an_organization_can_be_created(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -195,7 +195,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_can_update_an_organization()
+    public function an_active_user_can_update_an_organization(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -240,7 +240,7 @@ class OrganizationControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_delete_an_organization()
+    public function an_admin_can_delete_an_organization(): void
     {
         DirectoryEmulator::setup('default');
 

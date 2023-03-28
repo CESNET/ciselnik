@@ -12,7 +12,7 @@ use Tests\TestCase;
 class OrganizationCreatedTest extends TestCase
 {
     /** @test */
-    public function organization_created_notification_email_check()
+    public function organization_created_notification_email_check(): void
     {
         DirectoryEmulator::setup('default');
 

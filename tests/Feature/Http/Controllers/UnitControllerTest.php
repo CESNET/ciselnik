@@ -15,7 +15,7 @@ class UnitControllerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_anonymouse_user_cannot_see_units_index()
+    public function an_anonymouse_user_cannot_see_units_index(): void
     {
         $this
             ->followingRedirects()
@@ -25,7 +25,7 @@ class UnitControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_anonymouse_user_cannot_see_the_form_to_add_a_new_unit()
+    public function an_anonymouse_user_cannot_see_the_form_to_add_a_new_unit(): void
     {
         $this
             ->followingRedirects()
@@ -35,7 +35,7 @@ class UnitControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_can_see_units_index()
+    public function an_active_user_can_see_units_index(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -52,7 +52,7 @@ class UnitControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_can_see_the_form_to_add_a_new_unit()
+    public function an_active_user_can_see_the_form_to_add_a_new_unit(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -69,7 +69,7 @@ class UnitControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_can_store_a_new_unit()
+    public function an_active_user_can_store_a_new_unit(): void
     {
         DirectoryEmulator::setup('default');
         Mail::fake();
@@ -114,7 +114,7 @@ class UnitControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_can_see_the_update_form_for_a_unit()
+    public function an_active_user_can_see_the_update_form_for_a_unit(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -156,7 +156,7 @@ class UnitControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_active_user_can_update_an_existing_unit()
+    public function an_active_user_can_update_an_existing_unit(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -214,7 +214,7 @@ class UnitControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_delete_a_unit()
+    public function an_admin_can_delete_a_unit(): void
     {
         DirectoryEmulator::setup('default');
 

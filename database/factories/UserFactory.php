@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         $id = $this->faker->unique()->safeEmail();
 

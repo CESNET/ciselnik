@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUser;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -12,7 +14,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(): View
     {
         $this->authorize('viewAny', User::class);
 
@@ -27,14 +29,14 @@ class UserController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create', User::class);
 
         return view('users.create');
     }
 
-    public function store(StoreUser $request)
+    public function store(StoreUserRequest $request): RedirectResponse
     {
         $this->authorize('create', User::class);
 
@@ -47,7 +49,7 @@ class UserController extends Controller
             ->with('status', __('users.stored', ['name' => $user->name]));
     }
 
-    public function show(User $user)
+    public function show(User $user): View
     {
         $this->authorize('view', $user);
         $user->withTrashed();

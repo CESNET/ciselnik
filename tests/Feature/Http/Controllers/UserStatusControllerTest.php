@@ -12,7 +12,7 @@ class UserStatusControllerTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     /** @test */
-    public function an_anonymouse_user_cannot_toggle_users_status()
+    public function an_anonymouse_user_cannot_toggle_users_status(): void
     {
         $user = User::factory()->create();
 
@@ -25,7 +25,7 @@ class UserStatusControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_toggle_another_users_status()
+    public function a_user_cannot_toggle_another_users_status(): void
     {
         $user = User::factory()->create();
         $anotherUser = User::factory()->create();
@@ -40,7 +40,7 @@ class UserStatusControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_toggle_their_status()
+    public function a_user_cannot_toggle_their_status(): void
     {
         $user = User::factory()->create();
 
@@ -54,7 +54,7 @@ class UserStatusControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_toggle_another_users_status()
+    public function an_admin_can_toggle_another_users_status(): void
     {
         $admin = User::factory()->create(['admin' => true]);
         $anotherUser = User::factory()->create();
@@ -85,7 +85,7 @@ class UserStatusControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_cannot_toggle_their_status()
+    public function an_admin_cannot_toggle_their_status(): void
     {
         $admin = User::factory()->create(['admin' => true]);
 

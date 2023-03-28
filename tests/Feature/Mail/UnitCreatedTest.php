@@ -13,7 +13,7 @@ use Tests\TestCase;
 class UnitCreatedTest extends TestCase
 {
     /** @test */
-    public function unit_created_notification_email_check()
+    public function unit_created_notification_email_check(): void
     {
         DirectoryEmulator::setup('default');
 

@@ -15,7 +15,7 @@ class SearchOrganizationsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_component_can_render()
+    public function the_component_can_render(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -27,7 +27,7 @@ class SearchOrganizationsTest extends TestCase
     }
 
     /** @test */
-    public function the_component_is_present_in_organizations_index()
+    public function the_component_is_present_in_organizations_index(): void
     {
         DirectoryEmulator::setup('default');
 
@@ -42,7 +42,7 @@ class SearchOrganizationsTest extends TestCase
     }
 
     /** @test */
-    public function the_component_allows_searching_organizations()
+    public function the_component_allows_searching_organizations(): void
     {
         DirectoryEmulator::setup('default');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class UserStatusController extends Controller
@@ -17,7 +18,7 @@ class UserStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): RedirectResponse
     {
         $this->authorize('everything');
 

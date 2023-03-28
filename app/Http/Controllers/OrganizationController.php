@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOrganization;
-use App\Http\Requests\UpdateOrganization;
+use App\Http\Requests\StoreOrganizationRequest;
+use App\Http\Requests\UpdateOrganizationRequest;
 use App\Ldap\Organization;
 use App\Mail\OrganizationCreated;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class OrganizationController extends Controller
 {
@@ -15,17 +17,17 @@ class OrganizationController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(): View
     {
         return view('organizations.index');
     }
 
-    public function create()
+    public function create(): View
     {
         return view('organizations.create');
     }
 
-    public function store(StoreOrganization $request)
+    public function store(StoreOrganizationRequest $request): RedirectResponse
     {
         try {
             $organization = Organization::create(
@@ -45,7 +47,7 @@ class OrganizationController extends Controller
             ->with('status', __('organizations.stored'));
     }
 
-    public function show(Organization $organization)
+    public function show(Organization $organization): View|RedirectResponse
     {
         if ($organization->getAttribute('oparentpointer')) {
             return redirect()
@@ -58,14 +60,14 @@ class OrganizationController extends Controller
         ]);
     }
 
-    public function edit(Organization $organization)
+    public function edit(Organization $organization): View
     {
         return view('organizations.edit', [
             'organization' => $organization,
         ]);
     }
 
-    public function update(UpdateOrganization $request, Organization $organization)
+    public function update(UpdateOrganizationRequest $request, Organization $organization): RedirectResponse
     {
         $organization->save($request->validated());
 
@@ -74,7 +76,7 @@ class OrganizationController extends Controller
             ->with('status', __('organizations.updated'));
     }
 
-    public function destroy(Organization $organization)
+    public function destroy(Organization $organization): RedirectResponse
     {
         $this->authorize('everything');
 
