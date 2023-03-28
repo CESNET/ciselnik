@@ -13,7 +13,7 @@ class ShibbolethControllerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function if_no_shibboleth_just_show_a_meesage()
+    public function if_no_shibboleth_just_show_a_meesage(): void
     {
         $this
             ->get(route('login'))
@@ -22,7 +22,7 @@ class ShibbolethControllerTest extends TestCase
     }
 
     /** @test */
-    public function shibboleth_login_redirects_correctly()
+    public function shibboleth_login_redirects_correctly(): void
     {
         $this
             ->withServerVariables(['Shib-Handler' => 'http://localhost'])
@@ -32,7 +32,7 @@ class ShibbolethControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_newly_created_user_cannot_login()
+    public function a_newly_created_user_cannot_login(): void
     {
         $this
             ->followingRedirects()
@@ -51,7 +51,7 @@ class ShibbolethControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_user_with_inactive_account_cannot_login()
+    public function an_existing_user_with_inactive_account_cannot_login(): void
     {
         $user = User::factory()->create(['active' => false]);
         $user->refresh();
@@ -76,7 +76,7 @@ class ShibbolethControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_user_with_active_account_can_login()
+    public function an_existing_user_with_active_account_can_login(): void
     {
         $user = User::factory()->create(['active' => true]);
         $user->refresh();
@@ -95,7 +95,7 @@ class ShibbolethControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_log_out()
+    public function a_user_can_log_out(): void
     {
         $user = User::factory()->create(['active' => true]);
         $user->refresh();

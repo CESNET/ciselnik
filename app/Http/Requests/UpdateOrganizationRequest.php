@@ -4,14 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOrganization extends FormRequest
+class UpdateOrganizationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,15 +19,16 @@ class StoreOrganization extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'dc' => 'required|regex:/^[A-Za-z0-9-\ ]+$/',
             'o;lang-cs' => 'required|string|max:255',
             'o;lang-en' => 'nullable|string|max:255',
+            'o' => 'required|string|max:255',
             'oabbrev;lang-cs' => 'required|string|max:255',
             'oabbrev;lang-en' => 'nullable|string|max:255',
-            'ico' => 'required|numeric',
+            'oabbrev' => 'required|string|max:255',
+            'ico' => 'nullable|numeric',
             'street' => 'required|string|max:255',
             'l' => 'required|string|max:255',
             'postalcode' => 'required|numeric',

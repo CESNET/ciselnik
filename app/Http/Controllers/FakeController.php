@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class FakeController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         if (app()->environment(['local', 'testing'])) {
             $user = User::findOrFail($request->id);
@@ -21,7 +22,7 @@ class FakeController extends Controller
         }
     }
 
-    public function destroy()
+    public function destroy(): RedirectResponse
     {
         if (app()->environment(['local', 'testing'])) {
             Auth::logout();

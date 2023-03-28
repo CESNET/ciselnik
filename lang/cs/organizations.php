@@ -4,7 +4,6 @@ return [
     'add_organization' => 'Přidat novou organizaci',
     'add' => 'Přidat',
     'deleted' => ':dn úspěšně smazáno.',
-    'loading_orgs_please_wait' => 'Načítání organizací, prosím počkejte...',
     'none_found' => 'Hledanému dotazu neodpovídá žádná organizace.',
     'placeholder_c' => 'Dvoupísmenná zkratka země (CZ, SK, AU, DE, ...)',
     'placeholder_dc' => 'LDAP `dc` atribut organizace (dc=__DC__,ou=Organizations,dc=cesnet,dc=cz)',
@@ -27,7 +26,6 @@ return [
     'placeholder_ouabbrev;lang-en' => 'Zkratka organizační jednotky v angličtině',
     'placeholder_postalcode' => 'Poštovní směrovací číslo (bez mezer)',
     'placeholder_street' => 'Ulice (včetně čísla popisného a/nebo orientačního)',
-    'search' => 'Hledat organizaci dle jména, zkratky, města, ulice, IČO nebo `dc`...',
     'stored' => 'Organizace byla úspěšně vložena.',
     'updated' => 'Organizace byla úspěšně aktualizována.',
 ];

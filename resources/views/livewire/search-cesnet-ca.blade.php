@@ -1,58 +1,35 @@
 <div>
-    <div class="mb-4">
-        <form>
-            <label class="sr-only" for="search">{{ __('common.search') }}</label>
-            <input wire:model.debounce.500ms="search" class="w-full px-4 py-2 border rounded-lg" type="text"
-                name="search" id="search" placeholder="{{ __('cesnet-ca.search') }}" autofocus>
-        </form>
-        <div wire:loading class="font-bold">
-            {{ __('organizations.loading_orgs_please_wait') }}
-        </div>
-    </div>
 
-    <div>
-        <div class="overflow-x-auto bg-white border rounded-lg">
+    <x-searchbox models="cesnetcas" />
 
-            <table class="min-w-full border-b border-gray-300">
+    <x-main-div>
 
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">
-                            {{ __('common.name') }}</th>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">
-                            {{ __('common.source') }}
-                        </th>
-                    </tr>
-                </thead>
+        <x-table>
 
-                <tbody class="divide-y divide-gray-200">
+            <x-slot:thead>
+                <x-th>{{ __('common.name') }}</x-th>
+                <x-th>{{ __('common.source') }}</x-th>
+            </x-slot:thead>
 
-                    @forelse ($organizations as $organization)
-                        <tr x-data class="hover:bg-blue-50">
-                            <td class="whitespace-nowrap px-6 py-3 text-sm">
-                                {{ $organization->getFirstAttribute('o') }}
-                                <div class="text-xs text-gray-500">
-                                    {{ $organization->getDn() }}
-                                </div>
-                            </td>
-                            <td class="whitespace-nowrap px-6 py-3 text-sm">
-                                <x-pils.cesnet-ca-class :objectClass="$organization->getAttributes()['objectclass']" />
-                            </td>
-                        </tr>
+            @forelse ($organizations as $organization)
+                <x-tr>
+                    <x-td>
+                        <div>{{ $organization->getFirstAttribute('o') }}</div>
+                        <div class="text-xs text-gray-500">{{ $organization->getDn() }}</div>
+                    </x-td>
+                    <x-td>
+                        <x-pils.cesnet-ca-class :objectClass="$organization->getAttributes()['objectclass']" />
+                    </x-td>
+                </x-tr>
+            @empty
+                <x-tr>
+                    <x-td colspan="2">
+                        {{ __('organizations.none_found') }}
+                    </x-td>
+                </x-tr>
+            @endforelse
+        </x-table>
 
-                    @empty
-
-                        <tr class="hover:bg-blue-50">
-                            <td class="px-6 py-3 font-bold text-center" colspan="2">
-                                {{ __('organizations.none_found') }}
-                            </td>
-                        </tr>
-                    @endforelse
-
-                </tbody>
-
-            </table>
-        </div>
-    </div>
+    </x-main-div>
 
 </div>

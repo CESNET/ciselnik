@@ -13,7 +13,7 @@ class SearchUsersTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_component_can_render()
+    public function the_component_can_render(): void
     {
         User::factory()->create();
 
@@ -23,7 +23,7 @@ class SearchUsersTest extends TestCase
     }
 
     /** @test */
-    public function the_component_is_present_in_users_index()
+    public function the_component_is_present_in_users_index(): void
     {
         $admin = User::factory()->create(['admin' => true]);
 
@@ -34,7 +34,7 @@ class SearchUsersTest extends TestCase
     }
 
     /** @test */
-    public function the_component_allows_searching_users_by_name()
+    public function the_component_allows_searching_users_by_name(): void
     {
         $admin = User::factory()->create(['admin' => true]);
         User::factory()->times(10)->create();
@@ -49,7 +49,7 @@ class SearchUsersTest extends TestCase
     }
 
     /** @test */
-    public function the_component_allows_searching_users_by_email()
+    public function the_component_allows_searching_users_by_email(): void
     {
         $admin = User::factory()->create(['admin' => true]);
         User::factory()->times(10)->create();
@@ -63,7 +63,7 @@ class SearchUsersTest extends TestCase
     }
 
     /** @test */
-    public function the_component_allows_searching_users_by_uniqueid()
+    public function the_component_allows_searching_users_by_uniqueid(): void
     {
         $admin = User::factory()->create(['admin' => true]);
         User::factory()->times(10)->create();

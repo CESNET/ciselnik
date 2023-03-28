@@ -12,7 +12,7 @@ class UserControllerTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     /** @test */
-    public function an_anonymouse_user_isnt_shown_a_users_list()
+    public function an_anonymouse_user_isnt_shown_a_users_list(): void
     {
         $this
             ->followingRedirects()
@@ -23,7 +23,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_anonymouse_user_isnt_shown_a_users_detail()
+    public function an_anonymouse_user_isnt_shown_a_users_detail(): void
     {
         $user = User::factory()->create();
 
@@ -36,7 +36,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_anonymouse_user_isnt_shown_a_form_to_add_a_new_user()
+    public function an_anonymouse_user_isnt_shown_a_form_to_add_a_new_user(): void
     {
         $this
             ->followingRedirects()
@@ -47,7 +47,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_isnt_shown_a_users_list()
+    public function a_user_isnt_shown_a_users_list(): void
     {
         $user = User::factory()->create();
 
@@ -61,7 +61,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_isnt_shown_another_users_detail()
+    public function a_user_isnt_shown_another_users_detail(): void
     {
         $user = User::factory()->create();
         $anotherUser = User::factory()->create();
@@ -76,7 +76,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_isnt_shown_a_form_to_add_a_new_user()
+    public function a_user_isnt_shown_a_form_to_add_a_new_user(): void
     {
         $user = User::factory()->create();
 
@@ -90,7 +90,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_is_shown_their_users_detail()
+    public function a_user_is_shown_their_users_detail(): void
     {
         $user = User::factory()->create();
 
@@ -107,7 +107,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_is_shown_a_users_list()
+    public function an_admin_is_shown_a_users_list(): void
     {
         $admin = User::factory()->create(['admin' => true]);
 
@@ -124,7 +124,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_is_shown_another_users_detail()
+    public function an_admin_is_shown_another_users_detail(): void
     {
         $admin = User::factory()->create(['admin' => true]);
         $anotherUser = User::factory()->create();
@@ -142,7 +142,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_is_shown_a_form_to_add_a_new_user()
+    public function an_admin_is_shown_a_form_to_add_a_new_user(): void
     {
         $admin = User::factory()->create(['admin' => true]);
 
@@ -157,7 +157,7 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_add_a_new_user()
+    public function an_admin_can_add_a_new_user(): void
     {
         $admin = User::factory()->create(['admin' => true]);
 

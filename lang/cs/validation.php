@@ -125,6 +125,7 @@ return [
     'uuid' => 'Pole :attribute musí být korektní UUID.',
 
     'attributes' => [
+        'dc' => 'dc',
         'c' => 'země',
         'l' => 'město',
         'labeleduri' => 'domovská URL adresa',
@@ -137,6 +138,7 @@ return [
         'ou;lang-en' => 'organizační jednotka v angličtině',
         'ouabbrev;lang-cs' => 'zkratka organizační jednotky v češtině',
         'ouabbrev;lang-en' => 'zkratka organizační jednotky v angličtině',
+        'ico' => 'identifikační číslo osoby (IČO)',
         'postalcode' => 'PSČ',
         'street' => 'ulice',
     ],

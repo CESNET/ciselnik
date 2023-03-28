@@ -30,6 +30,7 @@ return [
     'organizations' => 'Organizations',
     'ou' => 'Organizational Unit',
     'restore' => 'Restore',
+    'show' => 'Show',
     'source' => 'Source',
     'status' => 'Status',
     'uniqueid' => 'UniqueID',

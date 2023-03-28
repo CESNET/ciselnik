@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUnit;
-use App\Http\Requests\UpdateUnit;
+use App\Http\Requests\StoreUnitRequest;
+use App\Http\Requests\UpdateUnitRequest;
 use App\Ldap\Organization;
 use App\Ldap\Unit;
 use App\Mail\UnitCreated;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class UnitController extends Controller
 {
@@ -16,19 +18,19 @@ class UnitController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(): View
     {
         return view('units.index');
     }
 
-    public function create()
+    public function create(): View
     {
         return view('units.create', [
             'organizations' => Organization::whereNotHas('oparentpointer')->orderBy('o')->get(),
         ]);
     }
 
-    public function store(StoreUnit $request)
+    public function store(StoreUnitRequest $request): RedirectResponse
     {
         $dc = preg_replace('/dc=/', '', $request->oparentpointer);
         $organization = Organization::whereDc($dc)->firstOrFail();
@@ -44,7 +46,7 @@ class UnitController extends Controller
                 ])
             );
 
-            Mail::to(config('mail.notify_new_object'))->send(new UnitCreated($unit));
+            Mail::send(new UnitCreated($unit));
         } catch (\LdapRecord\Exceptions\AlreadyExistsException) {
             abort(500, __('common.object_exists'));
         }
@@ -54,14 +56,14 @@ class UnitController extends Controller
             ->with('status', __('units.stored'));
     }
 
-    public function show(Unit $unit)
+    public function show(Unit $unit): View
     {
         return view('units.show', [
             'unit' => $unit,
         ]);
     }
 
-    public function edit(Unit $unit)
+    public function edit(Unit $unit): View
     {
         return view('units.edit', [
             'unit' => $unit,
@@ -69,7 +71,7 @@ class UnitController extends Controller
         ]);
     }
 
-    public function update(UpdateUnit $request, Unit $unit)
+    public function update(UpdateUnitRequest $request, Unit $unit): RedirectResponse
     {
         $base_dn = config('ldap.connections.default.base_dn');
         $dc = preg_replace('/dc=/', '', $request->validated('oparentpointer'), 1);
@@ -87,7 +89,7 @@ class UnitController extends Controller
             ->with('status', __('units.updated'));
     }
 
-    public function destroy(Unit $unit)
+    public function destroy(Unit $unit): RedirectResponse
     {
         $this->authorize('everything');
 

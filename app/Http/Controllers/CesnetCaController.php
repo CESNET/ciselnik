@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLaiOrganization;
+use App\Http\Requests\StoreLaiOrganizationRequest;
 use App\Ldap\LaiOrganization;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CesnetCaController extends Controller
 {
@@ -12,17 +14,17 @@ class CesnetCaController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(): View
     {
         return view('cesnet-ca.index');
     }
 
-    public function create()
+    public function create(): View
     {
         return view('cesnet-ca.create');
     }
 
-    public function store(StoreLaiOrganization $request)
+    public function store(StoreLaiOrganizationRequest $request): RedirectResponse
     {
         try {
             LaiOrganization::create($request->validated());
