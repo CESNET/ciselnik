@@ -10,7 +10,7 @@ This application is written in Laravel 10 and uses PHP version at least 8.1.0.
 
 Authentication is managed by locally running Shibboleth Service Provider, so Apache web server is highly recommended as there is an official Shibboleth module for Apache.
 
-- PHP 8.0.2+
+- PHP 8.1.0+
 - Shibboleth SP 3.x
 - Apache 2.4
 - MariaDB 10.6
