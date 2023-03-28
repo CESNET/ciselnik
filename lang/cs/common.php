@@ -30,6 +30,7 @@ return [
     'organizations' => 'Organizace',
     'ou' => 'Organizační jednotka',
     'restore' => 'Obnovit',
+    'show' => 'Zobrazit',
     'source' => 'Zdroj',
     'status' => 'Status',
     'uniqueid' => 'UniqueID',

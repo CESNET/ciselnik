@@ -1,61 +1,36 @@
 <div>
 
-    <div class="mb-4">
-        <form>
-            <label class="sr-only" for="search">{{ __('common.search') }}</label>
-            <input wire:model.debounce.500ms="search" class="w-full px-4 py-2 border rounded-lg" type="text"
-                name="search" id="search" placeholder="{{ __('organizations.search') }}" autofocus>
-        </form>
-        <div wire:loading class="font-bold">
-            {{ __('units.loading_units_please_wait') }}
-        </div>
-    </div>
+    <x-searchbox models="units" />
 
-    <div>
-        <div class="overflow-x-auto bg-white border rounded-lg">
+    <x-main-div>
 
-            <table class="min-w-full border-b border-gray-300">
+        <x-table>
 
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">
-                            {{ __('common.name') }}</th>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">&nbsp;
-                        </th>
-                    </tr>
-                </thead>
+            <x-slot:thead>
+                <x-th>{{ __('common.name') }}</x-th>
+                <x-th>&nbsp;</x-th>
+            </x-slot:thead>
 
-                <tbody class="divide-y divide-gray-200">
+            @forelse ($units as $unit)
+                <x-tr>
+                    <x-td>
+                        <div>{{ $unit->getFirstAttribute('o;lang-cs') ?? $unit->getFirstAttribute('o') }}</div>
+                        <div class="text-xs text-gray-500">{{ $unit->getDn() }}</div>
+                    </x-td>
+                    <x-td>
+                        <x-a href="{{ route('units.show', $unit) }}">{{ __('common.show') }}</x-a>
+                    </x-td>
+                </x-tr>
+            @empty
+                <x-tr>
+                    <x-td colspan="2">
+                        {{ __('units.none_found') }}
+                    </x-td>
+                </x-tr>
+            @endforelse
 
-                    @forelse ($units as $unit)
-                        <tr x-data class="hover:bg-blue-50 cursor-pointer"
-                            @click="window.location = $el.querySelector('a').href">
-                            <td class="whitespace-nowrap px-6 py-3 text-sm">
-                                {{ $unit->getFirstAttribute('o;lang-cs') ?? $unit->getFirstAttribute('o') }}
-                                <div class="text-xs text-gray-500">
-                                    {{ $unit->getDn() }}
-                                </div>
-                            </td>
-                            <td class="whitespace-nowrap px-6 py-3 text-sm">
-                                <a class="hover:underline text-blue-500"
-                                    href="{{ route('units.show', $unit) }}">{{ __('common.detail') }}</a>
-                            </td>
-                        </tr>
+        </x-table>
 
-                    @empty
-
-                        <tr class="hover:bg-blue-50">
-                            <td class="px-6 py-3 font-bold text-center" colspan="2">
-                                {{ __('units.none_found') }}
-                            </td>
-                        </tr>
-                    @endforelse
-
-                </tbody>
-
-            </table>
-
-        </div>
-    </div>
+    </x-main-div>
 
 </div>

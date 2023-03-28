@@ -1,74 +1,53 @@
 <div>
 
-    @if (!empty($search) or $users->count() > 5)
-        <div class="mb-4">
-            <form>
-                <label class="sr-only" for="search">{{ __('common.search') }}</label>
-                <input wire:model.debounce.500ms="search" class="w-full px-4 py-2 border rounded-lg" type="text"
-                    name="search" id="search" placeholder="{{ __('users.search') }}" autofocus>
-            </form>
-            <div wire:loading class="font-bold">
-                {{ __('users.loading_users_please_wait') }}
-            </div>
-        </div>
-    @endif
+    <x-searchbox models="users" />
 
-    <div>
-        <div class="overflow-x-auto bg-white border rounded-lg">
+    <x-main-div>
 
-            <table class="min-w-full border-b border-gray-100">
+        <x-table>
 
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">
-                            {{ __('common.name') }}</th>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">
-                            {{ __('common.email') }}</th>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">
-                            {{ __('common.status') }}</th>
-                        <th class="px-6 py-3 text-xs tracking-widest text-left uppercase bg-gray-100 border-b">&nbsp;
-                        </th>
-                    </tr>
-                </thead>
+            <x-slot:thead>
+                <x-th>{{ __('common.name') }}</x-th>
+                <x-th>{{ __('common.email') }}</x-th>
+                <x-th>{{ __('common.status') }}</x-th>
+                <x-th>&nbsp;</x-th>
+            </x-slot:thead>
 
-                <tbody class="divide-y divide-gray-300">
+            @forelse ($users as $user)
+                <x-tr>
+                    <x-td>
+                        <div class="font-bold">{{ $user->name }}</div>
+                        <div class="text-gray-400">{{ $user->uniqueid }}</div>
+                    </x-td>
+                    <x-td>
+                        <x-a href="mailto:{{ $user->email }}">{{ $user->email }}
+                        </x-a>
+                    </x-td>
+                    <x-td>
+                        <div>
+                            <x-pils.users-status :$user />
+                        </div>
+                        <div>
+                            <x-pils.users-role :$user />
+                        </div>
+                    </x-td>
+                    <x-td>
+                        <x-a href="{{ route('users.show', $user) }}">{{ __('common.show') }}
+                        </x-a>
+                    </x-td>
+                </x-tr>
+            @empty
+                <x-tr>
+                    <x-td colspan="4">
+                        {{ __('users.none_found') }}
+                    </x-td>
+                </x-tr>
+            @endforelse
 
-                    @forelse ($users as $user)
-                        <tr x-data class="hover:bg-blue-50 cursor-pointer"
-                            @click="window.location = $el.querySelector('a.link').href">
-                            <td class="whitespace-nowrap px-6 py-3 text-sm">
-                                <div class="font-bold">{{ $user->name }}</div>
-                                <div class="text-gray-400">{{ $user->uniqueid }}</div>
-                            </td>
-                            <td class="whitespace-nowrap px-6 py-3 text-sm"><a class="hover:underline text-blue-500"
-                                    href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-                            <td class="whitespace-nowrap px-6 py-3 text-sm">
-                                <div>
-                                    <x-pils.users-status :user="$user" />
-                                </div>
-                                <div>
-                                    <x-pils.users-role :user="$user" />
-                                </div>
-                            </td>
-                            <td class="whitespace-nowrap px-6 py-3 text-sm"><a
-                                    class="hover:underline link text-blue-500"
-                                    href="{{ route('users.show', $user) }}">{{ __('common.detail') }}</a></td>
-                        </tr>
-                    @empty
-                        <tr class="hover:bg-blue-50 cursor-pointer">
-                            <td class="whitespace-nowrap px-6 py-3 font-semibold text-center" colspan="4">
-                                {{ __('users.none_found') }}
-                            </td>
-                        </tr>
-                    @endforelse
+        </x-table>
 
-                </tbody>
+        {{ $users->links() }}
 
-            </table>
-
-            {{ $users->links() }}
-
-        </div>
-    </div>
+    </x-main-div>
 
 </div>
