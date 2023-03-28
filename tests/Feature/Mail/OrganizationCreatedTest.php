@@ -5,6 +5,7 @@ namespace Tests\Feature\Mail;
 use App\Ldap\Organization;
 use App\Mail\OrganizationCreated;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Support\Str;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
 use Tests\TestCase;
 
@@ -17,6 +18,7 @@ class OrganizationCreatedTest extends TestCase
 
         $organization = Organization::create([
             'dc' => fake()->word(),
+            'o' => Str::remove("'", fake()->company()),
             'o;lang-cs' => fake()->company(),
             'oabbrev;lang-cs' => fake()->word(),
             'ico' => fake()->randomNumber(),

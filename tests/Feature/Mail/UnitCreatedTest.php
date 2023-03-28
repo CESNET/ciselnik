@@ -6,6 +6,7 @@ use App\Ldap\Organization;
 use App\Ldap\Unit;
 use App\Mail\UnitCreated;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Support\Str;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
 use Tests\TestCase;
 
@@ -32,7 +33,7 @@ class UnitCreatedTest extends TestCase
             'o;lang-cs' => fake()->company(),
             'oabbrev;lang-cs' => fake()->word(),
             'ou;lang-cs' => fake()->company(),
-            'ou' => fake()->company(),
+            'ou' => Str::remove("'", fake()->company()),
             'ouabbrev;lang-cs' => fake()->word(),
             'oparentpointer' => $organization->getRdn(),
             'street' => fake()->streetAddress(),
