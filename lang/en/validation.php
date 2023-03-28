@@ -147,11 +147,13 @@ return [
     |
     */
 
+    /*
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +172,11 @@ return [
         'o;lang-en' => 'Organization in English',
         'oabbrev;lang-cs' => 'Organizational Abbreviation in Czech',
         'oabbrev;lang-en' => 'Organizational Abbreviation in English',
+        'oparentpointer' => 'Home Organization',
+        'ou;lang-cs' => 'Organizational Unit in Czech',
+        'ou;lang-en' => 'Organizational Unit in English',
+        'ouabbrev;lang-cs' => 'Organizational Unit Abbreviation in Czech',
+        'ouabbrev;lang-en' => 'Organizational Unit Abbreviation in English',
         'ico' => 'Company Identifier',
         'street' => 'Street',
         'l' => 'City',

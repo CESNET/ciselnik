@@ -22,7 +22,7 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.1",
         "laravel/sail": "^1.0.1",
-        "larswiegers/laravel-translations-checker": "^0.3",
+        "larswiegers/laravel-translations-checker": "^0.4.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",

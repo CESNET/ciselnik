@@ -125,6 +125,7 @@ return [
     'uuid' => 'Pole :attribute musí být korektní UUID.',
 
     'attributes' => [
+        'dc' => 'dc',
         'c' => 'země',
         'l' => 'město',
         'labeleduri' => 'domovská URL adresa',
