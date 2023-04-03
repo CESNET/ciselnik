@@ -47,7 +47,7 @@ class ShibbolethControllerTest extends TestCase
                 __('welcome.account_created_info'),
             ]);
 
-        $this->assertEquals('http://localhost/account_created', url()->current());
+        $this->assertEquals('http://localhost/auth', url()->current());
     }
 
     /** @test */
@@ -72,7 +72,7 @@ class ShibbolethControllerTest extends TestCase
         $this->assertFalse(Auth::check());
         $this->assertTrue(Auth::guest());
 
-        $this->assertEquals('http://localhost/inactive', url()->current());
+        $this->assertEquals('http://localhost/auth', url()->current());
     }
 
     /** @test */
