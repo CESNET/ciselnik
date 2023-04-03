@@ -9,11 +9,6 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index(): View
     {
         $this->authorize('viewAny', User::class);
