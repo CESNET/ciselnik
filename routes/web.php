@@ -32,7 +32,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('organizations', OrganizationController::class);
     Route::resource('units', UnitController::class);
-    Route::resource('cesnet-ca', CesnetCaController::class)->only('index', 'create', 'store');
 
     Route::resource('users', UserController::class)->except('edit', 'update', 'destroy');
 
