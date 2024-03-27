@@ -2,7 +2,7 @@
 
 Číselník (could probably be translated to English as "Directory") is [Laravel](https://laravel.com)-based web application for managing organizations participating in eduID.cz and eduroam.cz federations or CESNET CA.
 
-[![Actions Status](https://github.com/JanOppolzer/ciselnik/workflows/Laravel/badge.svg)](https://github.com/JanOppolzer/ciselnik/actions)
+[![Actions Status](https://github.com/CESNET/ciselnik/workflows/Laravel/badge.svg)](https://github.com/CESNET/ciselnik/actions)
 
 ## Requirements
 
@@ -138,7 +138,7 @@ The destination host should be running Ubuntu 22.04 LTS (Jammy Jellyfish) with P
 Clone this repository:
 
 ```bash
-git clone https://github.com/JanOppolzer/ciselnik
+git clone https://github.com/CESNET/ciselnik
 ```
 
 Install PHP dependencies:
