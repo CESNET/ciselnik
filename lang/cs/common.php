@@ -14,7 +14,6 @@ return [
     'delete' => 'Smazat',
     'detail' => 'Detail',
     'edit' => 'Upravit',
-    'ejbca' => 'EjbCA',
     'email' => 'E-mail',
     'empty' => 'Hodnota nevyplněna',
     'en' => 'EN',

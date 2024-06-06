@@ -14,7 +14,6 @@ return [
     'delete' => 'Delete',
     'detail' => 'Detail',
     'edit' => 'Edit',
-    'ejbca' => 'EjbCA',
     'email' => 'Email',
     'empty' => 'Not available',
     'en' => 'EN',
