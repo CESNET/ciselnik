@@ -20,7 +20,7 @@
 
     <div class="md:h-16 bg-gray-200">
         <div class="md:pl-4 h-full max-w-screen-xl mx-auto">
-            <nav x-data="{ open: false }" class="md:flex-row md:items-center flex flex-col justify-between h-full">
+            <nav class="md:flex-row md:items-center flex flex-col justify-between h-full">
 
                 <div class="md:flex-row md:items-center flex flex-col">
                     <p class="flex items-center h-16">
@@ -39,9 +39,9 @@
                             <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'users' and Request::segment(2) == Auth::id()) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
                                 href="{{ route('users.show', Auth::id()) }}">{{ __('common.my_profile') }}</a>
                         </li>
-                        @can('everything')
+                        @can('do-everything')
                             <li>
-                                <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'users' and empty(Request::segment(2))) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
+                                <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'users' and Request::segment(2) != Auth::id()) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
                                     href="{{ route('users.index') }}">{{ __('common.users') }}</a>
                             </li>
                         @endcan
@@ -74,17 +74,18 @@
 
                 <div class="md:hidden top-3 right-4 absolute block">
                     <button
-                        @click="open = !open; document.querySelector('#navigation').classList.toggle('hidden'); document.querySelector('#profile').classList.toggle('hidden')"
+                        onclick="document.querySelector('#navigation').classList.toggle('hidden');
+                        document.querySelector('#profile').classList.toggle('hidden');
+                        document.querySelector('#open-menu').classList.toggle('hidden');
+                        document.querySelector('#close-menu').classList.toggle('hidden')"
                         class="hover:bg-gray-300 dark:hover:bg-gray-700 p-2 rounded-lg" id="menu">
-                        <svg :class="open && 'hidden'" class="block w-6 h-6" id="open-menu"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
+                        <svg class="block w-6 h-6" id="open-menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
-                        <svg x-cloak :class="open || 'hidden'" class="w-6 h-6" id="close-menu"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
+                        <svg class="hidden w-6 h-6" id="close-menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
                         </svg>

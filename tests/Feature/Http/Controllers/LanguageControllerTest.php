@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class LanguageControllerTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function czech_localization(): void
     {
         $this
@@ -16,7 +17,7 @@ class LanguageControllerTest extends TestCase
         $this->assertEquals(app()->getLocale(), 'cs');
     }
 
-    /** @test */
+    #[Test]
     public function english_localization(): void
     {
         $this

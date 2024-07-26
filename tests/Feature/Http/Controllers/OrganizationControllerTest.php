@@ -8,13 +8,14 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class OrganizationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function an_anonymouse_user_isnt_show_the_list_of_organizations(): void
     {
         $this
@@ -26,7 +27,7 @@ class OrganizationControllerTest extends TestCase
         $this->assertEquals(route('login'), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_with_active_account_can_see_the_list_of_organizations(): void
     {
         DirectoryEmulator::setup('default');
@@ -41,7 +42,7 @@ class OrganizationControllerTest extends TestCase
         $this->assertEquals(route('organizations.index'), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_with_active_account_can_see_the_form_to_add_a_new_organization(): void
     {
         $user = User::factory()->create(['active' => true]);
@@ -67,7 +68,7 @@ class OrganizationControllerTest extends TestCase
         $this->assertEquals(route('organizations.create'), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_can_add_a_new_organization(): void
     {
         DirectoryEmulator::setup('default');
@@ -100,7 +101,7 @@ class OrganizationControllerTest extends TestCase
         ob_end_clean();
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_is_redirected_to_a_unit_when_accessing_unit_via_organizations(): void
     {
         DirectoryEmulator::setup('default');
@@ -148,7 +149,7 @@ class OrganizationControllerTest extends TestCase
         ob_end_clean();
     }
 
-    /** @test */
+    #[Test]
     public function an_organization_can_be_edited(): void
     {
         DirectoryEmulator::setup('default');
@@ -177,7 +178,7 @@ class OrganizationControllerTest extends TestCase
         ob_end_clean();
     }
 
-    /** @test */
+    #[Test]
     public function an_organization_can_be_created(): void
     {
         DirectoryEmulator::setup('default');
@@ -194,7 +195,7 @@ class OrganizationControllerTest extends TestCase
         DirectoryEmulator::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_can_update_an_organization(): void
     {
         DirectoryEmulator::setup('default');
@@ -239,7 +240,7 @@ class OrganizationControllerTest extends TestCase
         ob_end_clean();
     }
 
-    /** @test */
+    #[Test]
     public function an_admin_can_delete_an_organization(): void
     {
         DirectoryEmulator::setup('default');

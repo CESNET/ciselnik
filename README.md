@@ -6,16 +6,16 @@
 
 ## Requirements
 
-This application is written in Laravel 10 and uses PHP version at least 8.1.
+This application is written in Laravel 11 and uses PHP version at least 8.2.
 
 Authentication is managed by locally running Shibboleth Service Provider, so Apache web server is highly recommended as there is an official Shibboleth module for Apache.
 
-- PHP 8.1
+- PHP 8.2
 - Shibboleth SP 3
 - Apache 2.4
-- MariaDB 10.6
+- MariaDB 10.11
 
-The above mentioned requirements can easily be achieved by using Ubuntu 22.04 LTS (Jammy Jellyfish). For those running older Ubuntu or Debian, [Ondřej Surý's PPA repository](https://launchpad.net/~ondrej/+archive/ubuntu/php/) might be very appreciated.
+The above mentioned requirements can easily be achieved by using Ubuntu 24.04 LTS (Noble Numbat). For those running older Ubuntu or Debian, [Ondřej Surý's PPA repository](https://launchpad.net/~ondrej/+archive/ubuntu/php/) might be very appreciated.
 
 ## Setup
 
@@ -66,12 +66,12 @@ Then get a TLS certificate. If you would like to avoid paying to a Certificate A
 It is also highly recommended to allow `web` user (the user defined in `config` file in the `TARGET_USER` variable, i.e. the one under which Číselník application is saved in `/home` directory) to reload and restart PHP-FPM. It helps with minimizing outage during deployment of a new version. Edit `/etc/sudoers.d/web` accordingly:
 
 ```
-web ALL=(ALL) NOPASSWD:/bin/systemctl reload php8.1-fpm,/bin/systemctl restart php8.1-fpm
+web ALL=(ALL) NOPASSWD:/bin/systemctl reload php8.3-fpm,/bin/systemctl restart php8.3-fpm
 ```
 
 ### PHP
 
-PHP 8.1 is present as an official package in recommended Ubuntu 22.04 LTS (Jammy Jellyfish).
+PHP 8.3 is present as an official package in recommended Ubuntu 24.04 LTS (Noble Numbat).
 
 ```bash
 apt install php-fpm
@@ -81,7 +81,7 @@ Then follow information in your terminal.
 
 ```bash
 a2enmod proxy_fcgi setenvif
-a2enconf php8.1-fpm
+a2enconf php8.3-fpm
 systemctl restart apache2
 ```
 
@@ -133,7 +133,7 @@ The easiest way to install Číselník is to use Laravel [Envoy](https://laravel
 
 Laravel Envoy is currently available only for _macOS_ and _Linux_ operating systems. However, on Windows you can use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Of course, you can also use a virtualized Linux system inside, for example, a [VirtualBox](https://www.virtualbox.org) machine.
 
-The destination host should be running Ubuntu 22.04 LTS (Jammy Jellyfish) with PHP 8.1. If that is not the case, take care and tweak PHP-FPM service in `Envoy.blade.php` and in Apache configuration accordingly.
+The destination host should be running Ubuntu 24.04 LTS (Noble Numbat) with PHP 8.3. If that is not the case, take care and tweak PHP-FPM service in `Envoy.blade.php` and in Apache configuration accordingly.
 
 Clone this repository:
 

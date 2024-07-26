@@ -1,0 +1,36 @@
+TARGET_SERVER=ciselnik.cesnet.cz
+TARGET_USER=laravel
+TARGET_DIR=ciselnik
+
+REPOSITORY=https://github.com/CESNET/ciselnik
+
+APP_NAME=Číselník
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://ciselnik.cesnet.cz
+
+DB_HOST=127.0.0.1
+DB_DATABASE=ciselnik
+DB_USERNAME=ciselnik
+DB_PASSWORD=TgFZoBZOZ7Vc1UDjFk/YBdrbTTXwoxv/AQcR6kAkSqw=
+
+LDAP_HOST=cml3.cesnet.cz
+LDAP_USERNAME="uid=ciselnik.cesnet.cz,ou=Special Users,dc=cesnet,dc=cz"
+LDAP_PASSWORD="KA/krKxE1fQayonswppkW9uMfuM="
+LDAP_PORT=636
+LDAP_BASE_DN="ou=Organizations,dc=cesnet,dc=cz"
+LDAP_BASE_DN_CESNET_CA="dc=cesnet-ca,dc=cz"
+LDAP_SSL=true
+LDAP_TLS=false
+
+LOG_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/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
+LOG_SLACK_CHANNEL=#ciselnik
+
+MAIL_MAILER=smtp
+MAIL_HOST=ciselnik.cesnet.cz
+MAIL_PORT=25
+MAIL_FROM_ADDRESS="no-reply@cesnet.cz"
+MAIL_FROM_NAME="${APP_NAME}"
+MAIL_REPLYTO_ADDRESS="cesnet-sid@rt.cesnet.cz"
+MAIL_REPLYTO_NAME="RT fronta 708"
+MAIL_NOTIFY_NEW_OBJECT="ra@cesnet.cz"

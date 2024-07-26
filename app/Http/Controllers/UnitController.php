@@ -8,16 +8,23 @@ use App\Ldap\Organization;
 use App\Ldap\Unit;
 use App\Mail\UnitCreated;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class UnitController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(): View
     {
         return view('units.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create(): View
     {
         return view('units.create', [
@@ -25,6 +32,9 @@ class UnitController extends Controller
         ]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreUnitRequest $request): RedirectResponse
     {
         $dc = preg_replace('/dc=/', '', $request->oparentpointer);
@@ -51,6 +61,9 @@ class UnitController extends Controller
             ->with('status', __('units.stored'));
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(Unit $unit): View
     {
         return view('units.show', [
@@ -58,6 +71,9 @@ class UnitController extends Controller
         ]);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Unit $unit): View
     {
         return view('units.edit', [
@@ -66,6 +82,9 @@ class UnitController extends Controller
         ]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(UpdateUnitRequest $request, Unit $unit): RedirectResponse
     {
         $base_dn = config('ldap.connections.default.base_dn');
@@ -84,9 +103,12 @@ class UnitController extends Controller
             ->with('status', __('units.updated'));
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Unit $unit): RedirectResponse
     {
-        $this->authorize('everything');
+        Gate::authorize('do-everything');
 
         $dn = $unit->getDn();
 

@@ -11,6 +11,9 @@ use Illuminate\View\View;
 
 class ShibbolethController extends Controller
 {
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create(): RedirectResponse|string
     {
         if (is_null(request()->server('Shib-Handler'))) {
@@ -25,6 +28,9 @@ class ShibbolethController extends Controller
         );
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(): RedirectResponse|View
     {
         $mail = explode(';', request()->server('mail'));
@@ -38,16 +44,13 @@ class ShibbolethController extends Controller
             ]
         );
 
-        if ($user->wasRecentlyCreated) {
-            Log::channel('slack')->critical("A new account for {$user->name} is wating for an approval!");
+        $user->refresh();
 
-            // send e-mail notification
-            // after activating the account, they should be notified by email
-            // show the user information that their account is waiting for an activation
+        if (! $user->active && $user->created_at->isToday()) {
+            Log::channel('slack')->critical("A new account for {$user->name} is waiting for an approval!");
+
             return view('account_created');
         }
-
-        $user->refresh();
 
         if (! $user->active) {
             return view('inactive');
@@ -59,6 +62,9 @@ class ShibbolethController extends Controller
         return redirect()->intended('/');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(): RedirectResponse
     {
         Auth::logout();

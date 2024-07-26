@@ -9,8 +9,8 @@
             <x-slot:term>{{ __('common.name') }}</x-slot:term>
             {{ $user->name }}
             <div class="inline-block pl-4 space-x-4">
-                <x-pils.users-status :user="$user" />
-                <x-pils.users-role :user="$user" />
+                <x-pills.user-status :$user />
+                <x-pills.user-role :$user />
             </div>
         </x-row>
         <x-row>
@@ -19,12 +19,12 @@
         </x-row>
         <x-row>
             <x-slot:term>{{ __('common.email') }}</x-slot:term>
-            <a class="hover:underline text-blue-500" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+            <x-a href="mailto:{{ $user->email }}">{{ $user->email }}</x-a>
         </x-row>
         <div class="even:bg-gray-50 odd:bg-white px-4 py-5">
             <x-link-button href="{{ URL::previous() }}" text="{{ __('common.back') }}" />
-            <x-forms.users-status :user="$user" />
-            <x-forms.users-role :user="$user" />
+            <x-forms.user-status :$user />
+            <x-forms.user-role :$user />
         </div>
     </x-model-show>
 

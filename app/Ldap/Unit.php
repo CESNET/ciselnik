@@ -6,13 +6,16 @@ use LdapRecord\Models\Model;
 
 class Unit extends Model
 {
-    public static $objectClasses = [
+    /**
+     * The object classes of the LDAP model.
+     */
+    public static array $objectClasses = [
         'top',
         'dcObject',
         'cesnetOrganization',
     ];
 
-    protected function getCreatableRdnAttribute()
+    protected function getCreatableRdnAttribute(): string
     {
         return 'dc';
     }

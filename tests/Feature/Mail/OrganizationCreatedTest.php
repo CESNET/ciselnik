@@ -7,11 +7,12 @@ use App\Mail\OrganizationCreated;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Support\Str;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class OrganizationCreatedTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function organization_created_notification_email_check(): void
     {
         DirectoryEmulator::setup('default');

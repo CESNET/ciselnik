@@ -2,7 +2,7 @@
 
     <x-searchbox models="users" />
 
-    <x-main-div>
+    <x-section>
 
         <x-table>
 
@@ -13,41 +13,33 @@
                 <x-th>&nbsp;</x-th>
             </x-slot:thead>
 
-            @forelse ($users as $user)
+            @foreach ($users as $user)
                 <x-tr>
                     <x-td>
                         <div class="font-bold">{{ $user->name }}</div>
                         <div class="text-gray-400">{{ $user->uniqueid }}</div>
                     </x-td>
                     <x-td>
-                        <x-a href="mailto:{{ $user->email }}">{{ $user->email }}
-                        </x-a>
+                        <x-a href="mailto:{{ $user->email }}">{{ $user->email }}</x-a>
                     </x-td>
                     <x-td>
                         <div>
-                            <x-pils.users-status :$user />
+                            <x-pills.user-status :$user />
                         </div>
                         <div>
-                            <x-pils.users-role :$user />
+                            <x-pills.user-role :$user />
                         </div>
                     </x-td>
                     <x-td>
-                        <x-a href="{{ route('users.show', $user) }}">{{ __('common.show') }}
-                        </x-a>
+                        <x-a href="{{ route('users.show', $user) }}">{{ __('common.show') }}</x-a>
                     </x-td>
                 </x-tr>
-            @empty
-                <x-tr>
-                    <x-td colspan="4">
-                        {{ __('users.none_found') }}
-                    </x-td>
-                </x-tr>
-            @endforelse
+            @endforeach
 
         </x-table>
 
-        {{ $users->links() }}
+        <div>{{ $users->links() }}</div>
 
-    </x-main-div>
+    </x-section>
 
 </div>
