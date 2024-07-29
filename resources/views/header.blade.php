@@ -65,7 +65,7 @@
 
                             <a class="md:inline-block md:rounded hover:bg-gray-400 hover:text-gray-900 whitespace-nowrap block px-4 py-2"
                                 @env(['local', 'testing']) href="/fakelogout"
-                                @else href="#" @endenv>
+                                @else href="{{ route('logout') }}" @endenv>
                                 {{ __('common.logout') }}
                             </a>
                         </li>
