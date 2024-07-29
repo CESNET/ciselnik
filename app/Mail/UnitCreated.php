@@ -16,12 +16,8 @@ class UnitCreated extends Mailable
 
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
-    public function __construct(public Unit $unit)
-    {
-    }
+    public function __construct(public Unit $unit) {}
 
     /**
      * Get the message envelope.
@@ -47,6 +43,8 @@ class UnitCreated extends Mailable
 
     /**
      * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {

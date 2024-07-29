@@ -5,13 +5,14 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class UserStatusControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    /** @test */
+    #[Test]
     public function an_anonymouse_user_cannot_toggle_users_status(): void
     {
         $user = User::factory()->create();
@@ -24,7 +25,7 @@ class UserStatusControllerTest extends TestCase
         $this->assertEquals(route('login'), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_toggle_another_users_status(): void
     {
         $user = User::factory()->create();
@@ -39,7 +40,7 @@ class UserStatusControllerTest extends TestCase
         $this->assertEquals(route('users.status', $anotherUser), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_toggle_their_status(): void
     {
         $user = User::factory()->create();
@@ -53,7 +54,7 @@ class UserStatusControllerTest extends TestCase
         $this->assertEquals(route('users.status', $user), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function an_admin_can_toggle_another_users_status(): void
     {
         $admin = User::factory()->create(['admin' => true]);
@@ -84,7 +85,7 @@ class UserStatusControllerTest extends TestCase
         $this->assertTrue($anotherUser->active);
     }
 
-    /** @test */
+    #[Test]
     public function an_admin_cannot_toggle_their_status(): void
     {
         $admin = User::factory()->create(['admin' => true]);

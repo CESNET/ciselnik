@@ -9,17 +9,21 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
-        $id = $this->faker->unique()->safeEmail();
+        $id = fake()->unique()->safeEmail();
 
         return [
-            'name' => "{$this->faker->firstName()} {$this->faker->lastName()}",
+            'name' => fake()->firstName().' '.fake()->lastName(),
             'uniqueid' => $id,
             'email' => $id,
             'emails' => random_int(0, 1) ? "$id;{$this->faker->safeEmail()}" : null,
             'active' => true,
-            'admin' => false,
         ];
     }
 }

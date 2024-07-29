@@ -2,19 +2,20 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\SearchOrganizations;
 use App\Ldap\Organization;
+use App\Livewire\SearchOrganizations;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class SearchOrganizationsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function the_component_can_render(): void
     {
         DirectoryEmulator::setup('default');
@@ -26,12 +27,12 @@ class SearchOrganizationsTest extends TestCase
         DirectoryEmulator::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function the_component_is_present_in_organizations_index(): void
     {
         DirectoryEmulator::setup('default');
 
-        $user = User::factory()->create(['active' => true]);
+        $user = User::factory()->create();
 
         $this
             ->actingAs($user)
@@ -41,7 +42,7 @@ class SearchOrganizationsTest extends TestCase
         DirectoryEmulator::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function the_component_allows_searching_organizations(): void
     {
         DirectoryEmulator::setup('default');

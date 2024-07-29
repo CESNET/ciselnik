@@ -7,21 +7,31 @@ use App\Http\Requests\UpdateOrganizationRequest;
 use App\Ldap\Organization;
 use App\Mail\OrganizationCreated;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class OrganizationController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(): View
     {
         return view('organizations.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create(): View
     {
         return view('organizations.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreOrganizationRequest $request): RedirectResponse
     {
         try {
@@ -42,6 +52,9 @@ class OrganizationController extends Controller
             ->with('status', __('organizations.stored'));
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(Organization $organization): View|RedirectResponse
     {
         if ($organization->getAttribute('oparentpointer')) {
@@ -55,6 +68,9 @@ class OrganizationController extends Controller
         ]);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Organization $organization): View
     {
         return view('organizations.edit', [
@@ -62,6 +78,9 @@ class OrganizationController extends Controller
         ]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(UpdateOrganizationRequest $request, Organization $organization): RedirectResponse
     {
         $organization->save($request->validated());
@@ -71,9 +90,12 @@ class OrganizationController extends Controller
             ->with('status', __('organizations.updated'));
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Organization $organization): RedirectResponse
     {
-        $this->authorize('everything');
+        Gate::authorize('do-everything');
 
         $dn = $organization->getDn();
 

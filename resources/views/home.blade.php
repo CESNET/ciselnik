@@ -8,7 +8,7 @@
     </p>
 
     <p>
-        {!! __('welcome.contact') !!} <a class="hover:underline text-blue-500" href="mailto:info@eduid.cz">info@eduid.cz</a>.
+        {!! __('welcome.contact') !!} <x-a href="mailto:info@eduid.cz">info@eduid.cz</x-a>
     </p>
 
 @endsection

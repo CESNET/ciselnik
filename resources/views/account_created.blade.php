@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }} &dash; {{ __('welcome.account_created_title') }}</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @vite('resources/css/app.css')
 </head>
 
 <body class="sm:p-16 bg-gray-50 dark:bg-gray-900 dark:text-gray-400 p-4 antialiased text-gray-800">
@@ -35,8 +35,8 @@
                 <hr class="hidden">
                 <p class="text-center opacity-75">
                     <small class="text-sm">
-                        &copy; 2022 <a class="hover:underline text-blue-500" href="https://www.cesnet.cz">CESNET</a>,
-                        <a class="hover:underline text-blue-500" href="mailto:info@eduid.cz">info@eduid.cz</a>.
+                        &copy; {{ date('Y') }} <x-a href="https://www.cesnet.cz">CESNET</x-a>,
+                        <x-a href="mailto:708@cesnet.cz">708@cesnet.cz</x-a>.
                     </small>
                 </p>
             </footer>

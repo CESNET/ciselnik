@@ -36,8 +36,10 @@
                 <hr class="hidden">
                 <p class="text-center opacity-75">
                     <small class="text-sm">
-                        &copy; 2022 <a class="hover:underline text-blue-500" href="https://www.cesnet.cz">CESNET</a>,
-                        <a class="hover:underline text-blue-500" href="mailto:info@eduid.cz">info@eduid.cz</a>.
+                        &copy; 2022&dash;{{ date('Y') }} <a class="hover:underline text-blue-500"
+                            href="https://www.cesnet.cz">CESNET</a>
+                        &middot;
+                        <a class="hover:underline text-blue-500" href="mailto:info@eduid.cz">info@eduid.cz</a>
                     </small>
                 </p>
             </footer>

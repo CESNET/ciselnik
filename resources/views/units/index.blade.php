@@ -8,6 +8,6 @@
 
 @section('content')
 
-    @livewire('search-units')
+    <livewire:search-units />
 
 @endsection

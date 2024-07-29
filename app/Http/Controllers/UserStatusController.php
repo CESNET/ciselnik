@@ -5,17 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserStatusController extends Controller
 {
-    /**
-     * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user): RedirectResponse
     {
-        $this->authorize('everything');
+        Gate::authorize('do-everything');
 
         if ($request->user()->is($user)) {
             return redirect()

@@ -5,14 +5,15 @@ namespace Tests\Feature\Mail;
 use App\Ldap\Organization;
 use App\Ldap\Unit;
 use App\Mail\UnitCreated;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Support\Str;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
+use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\Mime\Address;
 use Tests\TestCase;
 
 class UnitCreatedTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function unit_created_notification_email_check(): void
     {
         DirectoryEmulator::setup('default');

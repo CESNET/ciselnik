@@ -5,13 +5,14 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class UserRoleControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    /** @test */
+    #[Test]
     public function an_anonymouse_user_cannot_toggle_users_role(): void
     {
         $user = User::factory()->create();
@@ -24,7 +25,7 @@ class UserRoleControllerTest extends TestCase
         $this->assertEquals(route('login'), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_toggle_another_users_role(): void
     {
         $user = User::factory()->create();
@@ -39,7 +40,7 @@ class UserRoleControllerTest extends TestCase
         $this->assertEquals(route('users.role', $anotherUser), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_toggle_their_role(): void
     {
         $user = User::factory()->create();
@@ -53,7 +54,7 @@ class UserRoleControllerTest extends TestCase
         $this->assertEquals(route('users.role', $user), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function an_admin_can_toggle_another_users_role(): void
     {
         $admin = User::factory()->create(['admin' => true]);
@@ -90,7 +91,7 @@ class UserRoleControllerTest extends TestCase
         $this->assertFalse($anotherUser->admin);
     }
 
-    /** @test */
+    #[Test]
     public function an_admin_cannot_toggle_their_role(): void
     {
         $admin = User::factory()->create(['admin' => true]);

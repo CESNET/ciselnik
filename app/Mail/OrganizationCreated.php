@@ -16,12 +16,8 @@ class OrganizationCreated extends Mailable
 
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
-    public function __construct(public Organization $organization)
-    {
-    }
+    public function __construct(public Organization $organization) {}
 
     /**
      * Get the message envelope.
@@ -47,6 +43,8 @@ class OrganizationCreated extends Mailable
 
     /**
      * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {

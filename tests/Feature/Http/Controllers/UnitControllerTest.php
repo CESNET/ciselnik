@@ -8,13 +8,14 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class UnitControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function an_anonymouse_user_cannot_see_units_index(): void
     {
         $this
@@ -24,7 +25,7 @@ class UnitControllerTest extends TestCase
             ->assertSeeText('login');
     }
 
-    /** @test */
+    #[Test]
     public function an_anonymouse_user_cannot_see_the_form_to_add_a_new_unit(): void
     {
         $this
@@ -34,7 +35,7 @@ class UnitControllerTest extends TestCase
             ->assertSeeText('login');
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_can_see_units_index(): void
     {
         DirectoryEmulator::setup('default');
@@ -51,7 +52,7 @@ class UnitControllerTest extends TestCase
         DirectoryEmulator::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_can_see_the_form_to_add_a_new_unit(): void
     {
         DirectoryEmulator::setup('default');
@@ -68,7 +69,7 @@ class UnitControllerTest extends TestCase
         DirectoryEmulator::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_can_store_a_new_unit(): void
     {
         DirectoryEmulator::setup('default');
@@ -113,7 +114,7 @@ class UnitControllerTest extends TestCase
         ob_end_clean();
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_can_see_the_update_form_for_a_unit(): void
     {
         DirectoryEmulator::setup('default');
@@ -155,7 +156,7 @@ class UnitControllerTest extends TestCase
         ob_end_clean();
     }
 
-    /** @test */
+    #[Test]
     public function an_active_user_can_update_an_existing_unit(): void
     {
         DirectoryEmulator::setup('default');
@@ -213,7 +214,7 @@ class UnitControllerTest extends TestCase
         ob_end_clean();
     }
 
-    /** @test */
+    #[Test]
     public function an_admin_can_delete_a_unit(): void
     {
         DirectoryEmulator::setup('default');
