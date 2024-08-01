@@ -9,7 +9,7 @@
     'TARGET_SERVER', 'TARGET_USER', 'TARGET_DIR',
     'REPOSITORY',
     'APP_NAME', 'APP_ENV', 'APP_DEBUG', 'APP_URL',
-    'LDAP_HOST', 'LDAP_USERNAME', 'LDAP_PASSWORD', 'LDAP_BASE_DN', 'LDAP_BASE_DN_CESNET_CA',
+    'LDAP_HOST', 'LDAP_USERNAME', 'LDAP_PASSWORD', 'LDAP_BASE_DN',
     'DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD',
     ])->notEmpty();
     } catch(Exception $e) {
@@ -40,7 +40,6 @@
     $ldap_password = $_ENV['LDAP_PASSWORD'];
     $ldap_port = $_ENV['LDAP_PORT'] ?? '636';
     $ldap_base_dn = $_ENV['LDAP_BASE_DN'];
-    $ldap_base_dn_cesnet_ca = $_ENV['LDAP_BASE_DN_CESNET_CA'];
     $ldap_ssl = $_ENV['LDAP_SSL'] ?? 'true';
     $ldap_tls = $_ENV['LDAP_TLS'] ?? 'false';
 
@@ -108,7 +107,6 @@
     s%LDAP_PASSWORD=.*%LDAP_PASSWORD=\"{{ $ldap_password }}\"%; \
     s%LDAP_PORT=.*%LDAP_PORT={{ $ldap_port }}%; \
     s%LDAP_BASE_DN=.*%LDAP_BASE_DN=\"{{ $ldap_base_dn }}\"%; \
-    s%LDAP_BASE_DN_CESNET_CA=.*%LDAP_BASE_DN_CESNET_CA=\"{{ $ldap_base_dn_cesnet_ca }}\"%; \
     s%LDAP_SSL=.*%LDAP_SSL={{ $ldap_ssl }}%; \
     s%LDAP_TLS=.*%LDAP_TLS={{ $ldap_tls }}%; \
     s%LOG_SLACK_WEBHOOK_URL=.*%LOG_SLACK_WEBHOOK_URL={{ $slack_hook }}%; \
