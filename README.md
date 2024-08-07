@@ -2,7 +2,8 @@
 
 Číselník (could probably be translated to English as "Directory") is [Laravel](https://laravel.com)-based web application for managing organizations participating in eduID.cz and eduroam.cz federations or CESNET CA.
 
-[![Actions Status](https://github.com/CESNET/ciselnik/workflows/Laravel/badge.svg)](https://github.com/CESNET/ciselnik/actions)
+![pint.yml](https://github.com/CESNET/ciselnik/actions/workflows/tests.yml/badge.svg)
+![release.yml](https://github.com/CESNET/ciselnik/actions/workflows/release.yml/badge.svg)
 
 ## Requirements
 
