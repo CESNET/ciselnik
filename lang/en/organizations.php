@@ -3,6 +3,7 @@
 return [
     'add_organization' => 'Add new Organization',
     'add' => 'Add',
+    'already_exists' => 'This organization already exists.',
     'deleted' => ':dn deleted successfully.',
     'none_found' => 'No organization found using your search query.',
     'placeholder_c' => 'Two-letter country code (CZ, SK, AU, DE, ...)',

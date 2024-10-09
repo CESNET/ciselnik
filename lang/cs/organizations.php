@@ -3,6 +3,7 @@
 return [
     'add_organization' => 'Přidat novou organizaci',
     'add' => 'Přidat',
+    'already_exists' => 'Tato organizace již existuje.',
     'deleted' => ':dn úspěšně smazáno.',
     'none_found' => 'Hledanému dotazu neodpovídá žádná organizace.',
     'placeholder_c' => 'Dvoupísmenná zkratka země (CZ, SK, AU, DE, ...)',

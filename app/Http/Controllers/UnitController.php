@@ -53,7 +53,10 @@ class UnitController extends Controller
 
             Mail::send(new UnitCreated($unit));
         } catch (\LdapRecord\Exceptions\AlreadyExistsException) {
-            abort(500, __('common.object_exists'));
+            $u = Unit::whereDc($request->validated('dc'))->first();
+
+            return to_route('units.show', $u)
+                ->with('status', __('organizations.already_exists'));
         }
 
         return redirect()

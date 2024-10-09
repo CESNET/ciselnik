@@ -44,7 +44,15 @@ class OrganizationController extends Controller
 
             Mail::send(new OrganizationCreated($organization));
         } catch (\LdapRecord\Exceptions\AlreadyExistsException) {
-            abort(500, __('common.object_exists'));
+            $o = Organization::whereDc($request->validated('dc'))->first();
+
+            if (! is_null($o->getAttribute('oparentpointer'))) {
+                return to_route('units.show', $o)
+                    ->with('status', __('organizations.already_exists'));
+            }
+
+            return to_route('organizations.show', $o)
+                ->with('status', __('organizations.already_exists'));
         }
 
         return redirect()
