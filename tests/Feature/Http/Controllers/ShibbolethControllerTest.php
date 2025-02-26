@@ -30,7 +30,7 @@ class ShibbolethControllerTest extends TestCase
             ->withServerVariables(['Shib-Handler' => 'http://localhost'])
             ->get('login');
 
-        $this->assertEquals('http://localhost/login', url()->current());
+        $this->assertEquals(config('app.url').'/login', url()->current());
     }
 
     #[Test]
@@ -55,7 +55,7 @@ class ShibbolethControllerTest extends TestCase
         $this->assertFalse(Auth::check());
         $this->assertTrue(Auth::guest());
 
-        $this->assertEquals('http://localhost/auth', url()->current());
+        $this->assertEquals(config('app.url').'/auth', url()->current());
     }
 
     #[Test]
@@ -77,7 +77,7 @@ class ShibbolethControllerTest extends TestCase
                 __('welcome.account_inactive_info'),
             ]);
 
-        $this->assertEquals('http://localhost/auth', url()->current());
+        $this->assertEquals(config('app.url').'/auth', url()->current());
         $this->assertFalse(Auth::check());
     }
 
@@ -115,6 +115,6 @@ class ShibbolethControllerTest extends TestCase
         $this
             ->actingAs($user)
             ->get(route('logout'))
-            ->assertRedirect('http://localhost/Shibboleth.sso/Logout');
+            ->assertRedirect(config('app.url').'/Shibboleth.sso/Logout');
     }
 }
