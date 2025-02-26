@@ -30,7 +30,7 @@
         </x-row>
         <x-row>
             <x-slot:term>{{ __('ldap.oParentPointer') }}</x-slot:term>
-            <input class="w-full px-4 py-2 mb-2 border rounded-lg shadow" type="text" name="oparentpointer"
+            <input class="w-full px-4 py-2 mb-2 border rounded-lg shadow-sm" type="text" name="oparentpointer"
                 id="oparentpointer" list="parentorganizations"
                 value="{{ old('oparentpointer', $unit->getFirstAttribute('oparentpointer')) }}" required>
             <datalist id="parentorganizations">

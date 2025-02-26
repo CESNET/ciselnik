@@ -2,8 +2,8 @@
 
     <noscript>
         <div class="text-red-50 py-4 font-bold bg-red-700">
-            <div class="flex items-center max-w-screen-xl px-4 mx-auto space-x-4">
-                <div class="p-2 bg-red-900 rounded">
+            <div class="flex items-center max-w-(--breakpoint-xl) px-4 mx-auto space-x-4">
+                <div class="p-2 bg-red-900 rounded-sm">
                     <svg class="text-red-50 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -19,7 +19,7 @@
     </noscript>
 
     <div class="md:h-16 bg-gray-200">
-        <div class="md:pl-4 h-full max-w-screen-xl mx-auto">
+        <div class="md:pl-4 h-full max-w-(--breakpoint-xl) mx-auto">
             <nav class="md:flex-row md:items-center flex flex-col justify-between h-full">
 
                 <div class="md:flex-row md:items-center flex flex-col">
@@ -28,20 +28,20 @@
                     </p>
                     <ul class="md:flex md:flex-row flex-col hidden" id="navigation">
                         <li>
-                            <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'organizations') bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
+                            <a class="md:inline-block md:rounded-sm block px-4 py-2 @if (Request::segment(1) === 'organizations') bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
                                 href="{{ route('organizations.index') }}">{{ __('common.organizations') }}</a>
                         </li>
                         <li>
-                            <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'units') bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
+                            <a class="md:inline-block md:rounded-sm block px-4 py-2 @if (Request::segment(1) === 'units') bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
                                 href="{{ route('units.index') }}">{{ __('common.units') }}</a>
                         </li>
                         <li>
-                            <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'users' and Request::segment(2) == Auth::id()) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
+                            <a class="md:inline-block md:rounded-sm block px-4 py-2 @if (Request::segment(1) === 'users' and Request::segment(2) == Auth::id()) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
                                 href="{{ route('users.show', Auth::id()) }}">{{ __('common.my_profile') }}</a>
                         </li>
                         @can('do-everything')
                             <li>
-                                <a class="md:inline-block md:rounded block px-4 py-2 @if (Request::segment(1) === 'users' and Request::segment(2) != Auth::id()) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
+                                <a class="md:inline-block md:rounded-sm block px-4 py-2 @if (Request::segment(1) === 'users' and Request::segment(2) != Auth::id()) bg-gray-400 text-gray-900 @else hover:bg-gray-400 hover:text-gray-900 @endif"
                                     href="{{ route('users.index') }}">{{ __('common.users') }}</a>
                             </li>
                         @endcan
@@ -52,18 +52,18 @@
                     <ul class="md:pr-4 md:flex md:flex-row md:text-sm md:items-center flex-col hidden" id="profile">
                         <li>
                             @if (App::currentLocale() === 'cs')
-                                <a class="md:inline-block md:rounded hover:bg-gray-400 hover:text-gray-900 block px-4 py-2"
+                                <a class="md:inline-block md:rounded-sm hover:bg-gray-400 hover:text-gray-900 block px-4 py-2"
                                     href="/language/en" title="{{ __('common.swith_to_english') }}">
                                     {{ __('common.en') }}
                                 </a>
                             @else
-                                <a class="md:inline-block md:rounded hover:bg-gray-400 hover:text-gray-900 block px-4 py-2"
+                                <a class="md:inline-block md:rounded-sm hover:bg-gray-400 hover:text-gray-900 block px-4 py-2"
                                     href="/language/cs" title="{{ __('common.prepnout_do_cestiny') }}">
                                     {{ __('common.cs') }}
                                 </a>
                             @endif
 
-                            <a class="md:inline-block md:rounded hover:bg-gray-400 hover:text-gray-900 whitespace-nowrap block px-4 py-2"
+                            <a class="md:inline-block md:rounded-sm hover:bg-gray-400 hover:text-gray-900 whitespace-nowrap block px-4 py-2"
                                 @env(['local', 'testing']) href="/fakelogout"
                                 @else href="{{ route('logout') }}" @endenv>
                                 {{ __('common.logout') }}
@@ -97,7 +97,7 @@
     </div>
 
     <div class="h-10 bg-gray-100">
-        <div class="md:px-8 h-full max-w-screen-xl px-4 mx-auto">
+        <div class="md:px-8 h-full max-w-(--breakpoint-xl) px-4 mx-auto">
             <div class="flex items-center justify-between h-full text-lg font-semibold">
                 <div>
                     @yield('title')

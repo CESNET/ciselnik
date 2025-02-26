@@ -1,7 +1,7 @@
 @props(['color' => 'blue'])
 
 <button type="submit" @class([
-    'px-4 py-2 rounded shadow',
+    'px-4 py-2 rounded-sm shadow-sm',
     'hover:bg-indigo-700 text-indigo-50 bg-indigo-600' => $color === 'indigo',
     'hover:bg-green-700 text-green-50 bg-green-600' => $color === 'green',
     'hover:bg-blue-700 text-blue-50 bg-blue-600' => $color === 'blue',

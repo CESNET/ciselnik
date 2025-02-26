@@ -35,7 +35,7 @@
                 '<div class="float-right text-sm font-semibold text-red-600">:message</div>',
             ) !!}
             <input
-                class="w-full px-4 py-2 border rounded-lg shadow @error('oparentpointer') border-red-500 @else @if (old('oparentpointer') !== null) border-green-500 @endif @enderror"
+                class="w-full px-4 py-2 border rounded-lg shadow-sm @error('oparentpointer') border-red-500 @else @if (old('oparentpointer') !== null) border-green-500 @endif @enderror"
                 type="text" name="oparentpointer" id="oparentpointer" list="parentorganizations"
                 value="{{ old('oparentpointer') }}" placeholder="{{ __('organizations.placeholder_oparentpointer') }}"
                 required>
